@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Art Decó × Bauhaus — 1925</title>
+<title>Art Decó × Bauhaus × Wabi-Sabi — Edición Académica</title>
 
 <style>
   /* ============================================
      FUENTES
      ============================================ */
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;700;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Serif+JP:wght@400;700&display=swap');
 
   /* ============================================
      VARIABLES + RESET
@@ -36,11 +36,19 @@
       --cream:  oklch(0.94 0.04 90);
       --charcoal: oklch(0.15 0.03 260);
       --dark:   oklch(0.08 0.04 265);
-      /* Easing tokens */
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-      --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-      --ease-deco:   cubic-bezier(0.2, 0.9, 0.3, 1.1);
+      /* Easing tokens — refinados, sutiles, académicos */
+      --ease-spring:  cubic-bezier(0.25, 1.2, 0.5, 1);
+      --ease-bounce:  cubic-bezier(0.34, 1.4, 0.64, 1);
+      --ease-smooth:  cubic-bezier(0.6, 0, 0.4, 1);
+      --ease-deco:    cubic-bezier(0.4, 0.4, 0.2, 1);
+      --ease-wabi:    cubic-bezier(0.45, 0.8, 0.5, 1);
+      --ease-largo:   cubic-bezier(0.2, 0, 0, 1);
+      /* Wabi-Sabi palette — apagado, terroso, contemplativo */
+      --washi:    oklch(0.94 0.02 85);
+      --sumi:     oklch(0.14 0.02 95);
+      --kuchiba:  oklch(0.52 0.08 50);
+      --aokezuri: oklch(0.38 0.04 240);
+      --kinsugi:  oklch(0.72 0.10 82);
     }
 
     body {
@@ -56,14 +64,20 @@
       letter-spacing: -0.02em;
     }
 
-    section { padding: 6rem 2rem; }
+    section { padding: 8rem 2rem; }
+
+    ::selection {
+      background: oklch(0.78 0.14 95 / 0.35);
+      color: var(--charcoal);
+    }
   }
 
   /* ============================================
      LAYOUT
      ============================================ */
   @layer layout {
-    .container { max-width: 1200px; margin: 0 auto; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .container-wide { max-width: 1300px; margin: 0 auto; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
@@ -85,8 +99,8 @@
     }
 
     @keyframes pulse-gold {
-      0%, 100% { box-shadow: 0 0 0 0 oklch(0.78 0.14 95 / 0.5); }
-      50%      { box-shadow: 0 0 0 20px oklch(0.78 0.14 95 / 0); }
+      0%, 100% { box-shadow: 0 0 0 0 oklch(0.78 0.14 95 / 0.3); }
+      50%      { box-shadow: 0 0 0 12px oklch(0.78 0.14 95 / 0); }
     }
 
     @keyframes spin-slow {
@@ -104,12 +118,12 @@
     }
 
     @keyframes slide-up {
-      from { opacity: 0; transform: translateY(60px); }
+      from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes scale-in {
-      from { opacity: 0; transform: scale(0.8); }
+      from { opacity: 0; transform: scale(0.94); }
       to   { opacity: 1; transform: scale(1); }
     }
 
@@ -121,6 +135,49 @@
     @keyframes stripe-move {
       0%   { transform: translateX(-100%); }
       100% { transform: translateX(100vw); }
+    }
+
+    @keyframes wabi-float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      25%       { transform: translateY(-6px) translateX(3px); }
+      50%       { transform: translateY(2px) translateX(-2px); }
+      75%       { transform: translateY(-3px) translateX(4px); }
+    }
+
+    @keyframes wabi-breathe {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50%      { transform: scale(1.015); opacity: 0.8; }
+    }
+
+    @keyframes wabi-appear {
+      0%   { opacity: 0; transform: translateY(20px); filter: blur(2px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    @keyframes kinsugi-glow {
+      0%, 100% { opacity: 0.15; }
+      33%      { opacity: 0.5; }
+      66%      { opacity: 0.1; }
+    }
+
+    @keyframes enso-draw {
+      0%   { stroke-dashoffset: 800; opacity: 0; }
+      20%  { opacity: 0.6; }
+      80%  { opacity: 0.6; }
+      100% { stroke-dashoffset: 0; opacity: 0.35; }
+    }
+
+    @keyframes petal-fall {
+      0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(110vh) translateX(60px) rotate(540deg); opacity: 0; }
+    }
+
+    @keyframes sumi-bleed {
+      0%   { transform: scale(0.3); opacity: 0; }
+      30%  { opacity: 0.12; }
+      100% { transform: scale(1); opacity: 0; }
     }
   }
 
@@ -157,7 +214,7 @@
 
     .hero-content {
       text-align: center; position: relative; z-index: 2;
-      animation: scale-in 1.2s var(--ease-deco) both;
+      animation: scale-in 2s var(--ease-largo) both;
     }
 
     .hero-content h1 {
@@ -288,8 +345,23 @@
 
     .section-label {
       font-family: 'Inter', sans-serif;
-      font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase;
+      font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase;
       color: var(--bronze); margin-bottom: 1rem;
+    }
+
+    .section-numeral {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem; font-weight: 900;
+      color: oklch(0.78 0.14 95 / 0.12);
+      line-height: 0.7;
+      position: absolute;
+      top: -2rem; left: -3rem;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @media (max-width: 768px) {
+      .section-numeral { font-size: 3rem; top: -1rem; left: -0.5rem; }
     }
 
     .section-heading {
@@ -310,14 +382,14 @@
       border: 1px solid oklch(0 0 0 / 0.08);
       padding: 3rem 2rem;
       position: relative;
-      transition: transform 0.5s var(--ease-spring), box-shadow 0.5s var(--ease-smooth);
+      transition: transform 0.8s var(--ease-spring), box-shadow 0.8s var(--ease-smooth);
       animation-timeline: view();
       animation-range: entry 0% cover 40%;
     }
 
     .deco-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 24px 60px oklch(0 0 0 / 0.12);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 12px 40px oklch(0 0 0 / 0.08);
     }
 
     /* Esquina dorada */
@@ -344,21 +416,21 @@
       display: flex; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
       cursor: pointer;
-      transition: transform 0.5s var(--ease-spring);
+      transition: transform 0.8s var(--ease-spring);
       animation-timeline: view();
       animation-range: entry 0% cover 30%;
     }
 
-    .shape-showcase:hover { transform: scale(1.05); z-index: 10; }
+    .shape-showcase:hover { transform: scale(1.03); z-index: 10; }
 
-    .shape-showcase .inner-shape { transition: all 0.6s var(--ease-deco); }
+    .shape-showcase .inner-shape { transition: all 1s var(--ease-deco); }
 
     /* Círculo Bauhaus */
     .shape-bauhaus-circle {
       width: 60%; aspect-ratio: 1;
       border-radius: 50%;
       background: var(--rot);
-      transition: all 0.6s var(--ease-spring);
+      transition: all 1s var(--ease-spring);
     }
     .shape-showcase:hover .shape-bauhaus-circle {
       border-radius: 0;
@@ -370,11 +442,11 @@
     .shape-bauhaus-square {
       width: 50%; aspect-ratio: 1;
       background: var(--blau);
-      transition: all 0.6s var(--ease-bounce);
+      transition: all 1s var(--ease-bounce);
     }
     .shape-showcase:hover .shape-bauhaus-square {
       border-radius: 50%;
-      transform: scale(1.3) rotate(180deg);
+      transform: scale(1.15) rotate(90deg);
       background: var(--rot);
     }
 
@@ -384,11 +456,11 @@
       border-left: 50px solid transparent;
       border-right: 50px solid transparent;
       border-bottom: 90px solid var(--gelb);
-      transition: all 0.8s var(--ease-deco);
+      transition: all 1.2s var(--ease-deco);
     }
     .shape-showcase:hover .shape-bauhaus-triangle {
       border-bottom-color: var(--blau);
-      transform: scale(1.4) rotate(120deg);
+      transform: scale(1.15) rotate(60deg);
     }
 
     /* Anillos Art Decó */
@@ -397,17 +469,17 @@
       border-radius: 50%;
       border: 3px solid var(--gold);
       position: relative;
-      transition: all 0.8s var(--ease-spring);
+      transition: all 1.2s var(--ease-spring);
     }
     .shape-deco-rings::after {
       content: '';
       position: absolute; inset: 12px;
       border-radius: 50%;
       border: 2px solid oklch(0.78 0.14 95 / 0.4);
-      transition: all 0.6s var(--ease-smooth);
+      transition: all 1s var(--ease-smooth);
     }
     .shape-showcase:hover .shape-deco-rings {
-      transform: rotate(180deg) scale(1.2);
+      transform: rotate(90deg) scale(1.08);
       border-color: var(--silver);
       box-shadow: 0 0 40px oklch(0.78 0.14 95 / 0.3);
     }
@@ -431,7 +503,7 @@
       display: grid; grid-template-columns: 1fr 80px 1fr; gap: 2rem;
       align-items: center; margin-bottom: 4rem;
       opacity: 0;
-      animation: slide-up 0.8s var(--ease-deco) forwards;
+      animation: slide-up 1.2s var(--ease-deco) forwards;
       animation-timeline: view();
       animation-range: entry 0% cover 30%;
     }
@@ -441,7 +513,7 @@
       background: var(--gold);
       border-radius: 50%;
       margin: 0 auto;
-      animation: pulse-gold 3s var(--ease-smooth) infinite;
+      animation: pulse-gold 6s var(--ease-smooth) infinite;
       z-index: 1;
     }
 
@@ -462,7 +534,7 @@
 
     .marquee-inner {
       display: inline-block;
-      animation: stripe-move 20s linear infinite;
+      animation: stripe-move 45s linear infinite;
     }
 
     /* ── FORM SECTION ────────────────────── */
@@ -484,7 +556,7 @@
       text-decoration: none;
       border: 2px solid var(--charcoal);
       cursor: pointer;
-      transition: all 0.4s var(--ease-spring);
+      transition: all 0.8s var(--ease-spring);
       position: relative;
       overflow: hidden;
     }
@@ -494,7 +566,7 @@
       position: absolute; inset: 0;
       background: linear-gradient(120deg, transparent, oklch(0.78 0.14 95 / 0.2), transparent);
       transform: translateX(-100%);
-      transition: transform 0.6s var(--ease-smooth);
+      transition: transform 1s var(--ease-smooth);
     }
 
     .cta-button:hover {
@@ -504,6 +576,29 @@
       box-shadow: 0 12px 30px oklch(0 0 0 / 0.15);
     }
     .cta-button:hover::before { transform: translateX(100%); }
+
+    /* ── COLOFÓN ─────────────────────────── */
+    .colophon {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: var(--dark);
+      color: var(--silver);
+      position: relative;
+    }
+
+    .colophon code {
+      background: oklch(1 1 0 / 0.06);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.8em;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .colophon .deco-rule {
+      margin: 0 auto 2rem;
+      width: 40px;
+      background: linear-gradient(90deg, var(--gold), oklch(0.78 0.14 95 / 0.2));
+    }
 
     /* ── DECO PATTERN SECTION ────────────── */
     .pattern-section {
@@ -534,7 +629,7 @@
       position: relative; overflow: hidden;
     }
     .reveal-image img {
-      transition: transform 0.8s var(--ease-deco);
+      transition: transform 1.2s var(--ease-deco);
     }
     .reveal-image:hover img {
       transform: scale(1.08);
@@ -543,7 +638,7 @@
       content: '';
       position: absolute; inset: 0;
       background: var(--charcoal);
-      transition: transform 0.6s var(--ease-smooth);
+      transition: transform 1s var(--ease-smooth);
       transform: scaleX(0);
       transform-origin: right;
     }
@@ -569,10 +664,358 @@
         var(--gold), var(--gelb), var(--gold), var(--rot),
         var(--gold)
       );
-      animation: spin-slow 15s linear infinite;
+      animation: spin-slow 40s linear infinite;
       position: absolute;
       opacity: 0.15;
       filter: blur(40px);
+    }
+
+    /* ============================================
+       WABI-SABI
+       Contrapunto: asimetría, textura, lo efímero
+       ============================================ */
+    .wabi-section {
+      background: var(--washi);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Textura de papel washi (CSS grain) */
+    .wabi-texture {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.5;
+      background-image:
+        radial-gradient(circle at 15% 30%, oklch(0.52 0.08 50 / 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 75% 60%, oklch(0.38 0.04 240 / 0.05) 0%, transparent 35%),
+        radial-gradient(circle at 50% 80%, oklch(0 0 0 / 0.03) 0%, transparent 30%);
+    }
+
+    .wabi-texture::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px, oklch(0 0 0 / 0.015) 2px, oklch(0 0 0 / 0.015) 3px
+      );
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+    }
+
+    .wabi-section .container { position: relative; z-index: 1; }
+
+    .wabi-label { color: var(--kuchiba); }
+
+    .wabi-heading {
+      font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--sumi);
+      letter-spacing: -0.01em;
+    }
+
+    .wabi-heading .kanji-title {
+      font-family: 'Noto Serif JP', serif;
+      font-style: normal;
+      font-weight: 400;
+      display: block;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.1;
+      color: var(--sumi);
+    }
+
+    .wabi-subtitle-es {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--aokezuri);
+      margin-top: 0.5rem;
+    }
+
+    /* ── PRINCIPLE CARD ──────────────────── */
+    .wabi-card {
+      background: oklch(0.96 0.01 85);
+      border: 1px solid oklch(0 0 0 / 0.06);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: transform 1s var(--ease-wabi), box-shadow 1s var(--ease-smooth), border-color 0.8s;
+
+      /* Borde sutilmente irregular con un clip-path orgánico */
+      clip-path: polygon(
+        4% 0%, 96% 0%,
+        100% 3%, 100% 97%,
+        97% 100%, 3% 100%,
+        0% 96%, 0% 4%
+      );
+    }
+
+    .wabi-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px oklch(0 0 0 / 0.08);
+      border-color: oklch(0.72 0.10 82 / 0.3);
+    }
+
+    /* Línea kintsugi dorada — aparece en hover */
+    .wabi-card::after {
+      content: '';
+      position: absolute;
+      top: 25%; left: -1px; right: -1px;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 10%,
+        oklch(0.72 0.10 82 / 0.6) 20%,
+        oklch(0.72 0.10 82 / 0) 40%,
+        oklch(0.72 0.10 82 / 0.4) 55%,
+        oklch(0.72 0.10 82 / 0) 70%,
+        oklch(0.72 0.10 82 / 0.6) 85%,
+        transparent 100%
+      );
+      opacity: 0;
+      transition: opacity 0.8s var(--ease-wabi);
+      pointer-events: none;
+    }
+    .wabi-card:hover::after { opacity: 1; animation: kinsugi-glow 8s var(--ease-smooth) infinite; }
+
+    .wabi-card .wabi-kanji {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.5rem;
+      color: var(--sumi);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .wabi-card h3 {
+      font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--sumi);
+      margin-bottom: 0.75rem;
+
+      & em {
+        font-weight: 400;
+        font-size: 0.9rem;
+        color: var(--aokezuri);
+        display: block;
+        margin-top: 0.25rem;
+        font-style: italic;
+      }
+    }
+
+    .wabi-card p {
+      color: oklch(0.3 0.02 95);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* ── ORGANIC SVG SHAPE ──────────────── */
+    .wabi-organic-container {
+      display: flex; justify-content: center; align-items: center;
+      margin-top: 5rem;
+      position: relative;
+    }
+
+    .wabi-stone {
+      width: 180px; height: 180px;
+      animation: wabi-float 18s var(--ease-wabi) infinite;
+    }
+
+    .wabi-stone .stone-body {
+      fill: oklch(0.38 0.04 240 / 0.15);
+      stroke: var(--aokezuri);
+      stroke-width: 1.5;
+      transition: fill 1.2s var(--ease-wabi), stroke 1.2s var(--ease-wabi);
+    }
+
+    .wabi-organic-container:hover .stone-body {
+      fill: oklch(0.52 0.08 50 / 0.2);
+      stroke: var(--kuchiba);
+    }
+
+    .wabi-stone .stone-vein {
+      fill: none;
+      stroke: var(--kinsugi);
+      stroke-width: 0.8;
+      stroke-dasharray: 60;
+      stroke-dashoffset: 0;
+      opacity: 0.4;
+      animation: dash 60s linear infinite;
+    }
+
+    /* Ondas concéntricas sutiles alrededor */
+    .wabi-ripple {
+      position: absolute; width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid oklch(0.52 0.08 50 / 0.15);
+      animation: wabi-breathe 12s var(--ease-wabi) infinite;
+      pointer-events: none;
+    }
+    .wabi-ripple:nth-child(2) {
+      width: 240px; height: 240px;
+      animation-delay: -2s;
+      border-color: oklch(0.38 0.04 240 / 0.1);
+    }
+    .wabi-ripple:nth-child(3) {
+      width: 280px; height: 280px;
+      animation-delay: -4s;
+      border-color: oklch(0.72 0.10 82 / 0.08);
+    }
+
+    /* ── ENSO — círculo caligráfico ─────── */
+    .enso-container {
+      display: flex; justify-content: center; align-items: center;
+      margin: 5rem 0 3rem;
+      position: relative;
+    }
+
+    .enso-svg {
+      width: 220px; height: 220px;
+      animation: wabi-breathe 10s var(--ease-wabi) infinite;
+    }
+
+    .enso-circle {
+      fill: none;
+      stroke: var(--sumi);
+      stroke-width: 3;
+      stroke-dasharray: 800;
+      stroke-dashoffset: 800;
+      animation: enso-draw 6s var(--ease-largo) forwards;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
+
+    .enso-caption {
+      text-align: center;
+      color: var(--aokezuri);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+      opacity: 0.7;
+    }
+
+    /* ── HAIKU ──────────────────────────── */
+    .wabi-haiku {
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .wabi-haiku .haiku-line {
+      display: block;
+      font-family: 'Noto Serif JP', 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      line-height: 2.2;
+      color: var(--sumi);
+    }
+
+    .wabi-haiku .haiku-line:nth-child(odd) {
+      font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--aokezuri);
+    }
+
+    /* ── KINTSUGI BOWL ──────────────────── */
+    .wabi-bowl-container {
+      display: flex; justify-content: center; align-items: center;
+      margin: 4rem 0;
+      position: relative;
+    }
+
+    .wabi-bowl {
+      width: 220px; height: 160px;
+      animation: wabi-float 20s var(--ease-wabi) infinite;
+    }
+
+    .bowl-body {
+      fill: oklch(0.35 0.04 70);
+      stroke: var(--kuchiba);
+      stroke-width: 1;
+      transition: fill 1.8s var(--ease-wabi);
+    }
+
+    .wabi-bowl-container:hover .bowl-body {
+      fill: oklch(0.42 0.06 75);
+    }
+
+    .kintsugi-seam {
+      fill: none;
+      stroke: var(--kinsugi);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-dasharray: 4 3;
+      opacity: 0.8;
+      animation: kinsugi-glow 10s var(--ease-smooth) infinite;
+    }
+
+    .kintsugi-seam-thin {
+      fill: none;
+      stroke: var(--kinsugi);
+      stroke-width: 0.7;
+      stroke-linecap: round;
+      stroke-dasharray: 2 4;
+      opacity: 0.45;
+    }
+
+    /* ── PÉTALOS FLOTANTES ──────────────── */
+    .petals-layer {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      width: 9px; height: 13px;
+      background: oklch(0.72 0.10 82 / 0.3);
+      border-radius: 50% 0 50% 0;
+      animation: petal-fall linear infinite;
+    }
+
+    .petal:nth-child(1)  { left: 12%; animation-duration: 11s; animation-delay: 0s; }
+    .petal:nth-child(2)  { left: 28%; animation-duration: 14s; animation-delay: -3s; width: 7px; height: 10px; opacity: 0.4; }
+    .petal:nth-child(3)  { left: 44%; animation-duration: 13s; animation-delay: -6s; }
+    .petal:nth-child(4)  { left: 62%; animation-duration: 15s; animation-delay: -9s; width: 8px; height: 11px; }
+    .petal:nth-child(5)  { left: 78%; animation-duration: 12s; animation-delay: -2s; }
+    .petal:nth-child(6)  { left: 90%; animation-duration: 16s; animation-delay: -7s; width: 6px; height: 9px; opacity: 0.35; }
+    .petal:nth-child(7)  { left: 5%; animation-duration: 18s; animation-delay: -11s; }
+    .petal:nth-child(8)  { left: 35%; animation-duration: 10s; animation-delay: -5s; width: 7px; height: 10px; opacity: 0.4; }
+    .petal:nth-child(9)  { left: 55%; animation-duration: 17s; animation-delay: -13s; }
+    .petal:nth-child(10) { left: 72%; animation-duration: 14s; animation-delay: -4s; width: 8px; height: 12px; }
+
+    /* ── SUMI MANCHAS ───────────────────── */
+    .sumi-bleed {
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--sumi) 0%, transparent 70%);
+      opacity: 0;
+      pointer-events: none;
+      animation: sumi-bleed 8s var(--ease-smooth) infinite;
+    }
+    .sumi-bleed:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+    .sumi-bleed:nth-child(2) { top: 60%; right: 8%; animation-delay: -4s; width: 160px; height: 160px; }
+    .sumi-bleed:nth-child(3) { top: 35%; left: 65%; animation-delay: -2s; width: 120px; height: 120px; }
+
+    /* ── TIMELINE WABI DOT ──────────────── */
+    .timeline-dot-wabi {
+      width: 12px; height: 12px;
+      background: var(--kuchiba);
+      border-radius: 0; /* cuadrado, no círculo — sutil asimetría */
+      margin: 0 auto;
+      opacity: 0.7;
+      animation: wabi-breathe 10s var(--ease-wabi) infinite;
+      z-index: 1;
+    }
+
+    .timeline-item-wabi {
+      display: grid; grid-template-columns: 1fr 80px 1fr; gap: 2rem;
+      align-items: center; margin-bottom: 4rem;
+      opacity: 0;
+      animation: wabi-appear 2s var(--ease-wabi) forwards;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
     }
   }
 
@@ -582,7 +1025,7 @@
   .reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.8s var(--ease-deco), transform 0.8s var(--ease-deco);
+    transition: opacity 1.2s var(--ease-deco), transform 1.2s var(--ease-deco);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
@@ -620,7 +1063,8 @@
      MANIFIESTO
      ═══════════════════════════════════════════ -->
 <section class="manifesto-section">
-  <div class="container">
+  <div class="container" style="position:relative;">
+    <span class="section-numeral">I</span>
     <p class="section-label">· Manifiesto ·</p>
     <h2 class="section-heading reveal">
       La forma sigue<br>a la función,<br><em style="color:var(--gold)">y la adorna.</em>
@@ -628,19 +1072,23 @@
     <div class="deco-rule"></div>
     <div class="grid-2" style="margin-top:3rem;">
       <div class="reveal">
-        <p style="font-size:1.1rem; line-height:1.8; color:oklch(0.25 0.04 260);">
-          La Bauhaus nos enseñó que menos es más. El Art Decó nos recordó
-          que más es glorioso. Esta página fusiona ambos: geometría pura
-          con ornamentación dorada, grids funcionales con tipografía
-          majestuosa, minimalismo cromático con destellos de lujo.
+        <p style="font-size:1.05rem; line-height:1.9; color:oklch(0.25 0.04 260);">
+          En 1919, Walter Gropius fundó la Staatliches Bauhaus en Weimar bajo un principio radical:
+          la forma sigue a la función. Seis años después, la Exposition des Arts Décoratifs de París
+          consagró el Art Decó: geometría fastuosa, metales nobles, ornamentación sin complejos.
+          Esta página reconcilia ambas tradiciones — geometría pura con filigrana dorada,
+          grids funcionales con tipografía palaciega, minimalismo cromático con destellos de lujo.
         </p>
       </div>
       <div class="reveal" style="animation-delay:0.2s;">
-        <p style="font-size:1.1rem; line-height:1.8; color:oklch(0.25 0.04 260);">
-          Cada animación usa curvas de easing personalizadas:
-          <code style="background:oklch(0.78 0.14 95 / 0.2); padding:0.1rem 0.4rem; border-radius:4px;">cubic-bezier(0.34, 1.56, 0.64, 1)</code>
-          para un efecto spring, bounce para rebotes juguetones,
-          y curvas suaves para transiciones elegantes.
+        <p style="font-size:1.05rem; line-height:1.9; color:oklch(0.25 0.04 260);">
+          Cada animación obedece a curvas de easing calibradas con precisión tipográfica:
+          <code style="background:oklch(0.78 0.14 95 / 0.15); padding:0.1rem 0.5rem; border-radius:4px;">cubic-bezier(0.25, 1.2, 0.5, 1)</code>
+          para una respuesta elástica de muelle amortiguado,
+          <code style="background:oklch(0.78 0.14 95 / 0.15); padding:0.1rem 0.5rem; border-radius:4px;">cubic-bezier(0.6, 0, 0.4, 1)</code>
+          para transiciones suaves tipo ease-out quint,
+          y una curva wabi-sabi deliberadamente incompleta
+          que nunca alcanza el 100% de velocidad.
         </p>
       </div>
     </div>
@@ -651,7 +1099,8 @@
      GALERÍA DE FORMAS INTERACTIVAS
      ═══════════════════════════════════════════ -->
 <section class="shapes-gallery">
-  <div class="container">
+  <div class="container" style="position:relative;">
+    <span class="section-numeral" style="color:oklch(1 1 0 / 0.06);">II</span>
     <p class="section-label" style="color:var(--silver);">· Interaktion ·</p>
     <h2 class="section-heading" style="color:var(--cream); margin-bottom:3rem;">
       Pasa el cursor<br>sobre las formas
@@ -675,12 +1124,157 @@
 </section>
 
 <!-- ═══════════════════════════════════════════
+     WABI-SABI · UPGRADE
+     ═══════════════════════════════════════════ -->
+<section class="wabi-section">
+  <div class="wabi-texture"></div>
+  <div class="petals-layer">
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div>
+  </div>
+  <div class="sumi-bleed"></div>
+  <div class="sumi-bleed"></div>
+  <div class="sumi-bleed"></div>
+
+  <div class="container" style="position:relative;">
+    <span class="section-numeral" style="color:oklch(0.14 0.02 95 / 0.06);">III</span>
+    <p class="section-label wabi-label reveal">· Wabi-Sabi ·</p>
+
+    <div class="wabi-heading reveal">
+      <span class="kanji-title">侘寂</span>
+      <span class="wabi-subtitle-es">Wabi-Sabi — lo imperfecto, lo efímero, lo incompleto</span>
+    </div>
+
+    <p class="reveal" style="max-width:600px; color:var(--aokezuri); font-size:1.1rem; line-height:1.8; margin-top:2rem;">
+      Donde Bauhaus exige geometría perfecta y Art Decó impone ornamentos dorados,
+      el wabi-sabi susurra otra verdad: la belleza se esconde en la grieta, en la
+      asimetría, en lo que el tiempo ha tocado. Nada es perfecto, nada está terminado,
+      nada dura para siempre — y justamente por eso, todo es precioso.
+    </p>
+
+    <!-- Tres principios -->
+    <div class="grid-3" style="margin-top:4rem;">
+      <div class="wabi-card reveal" style="--delay: 0ms;">
+        <span class="wabi-kanji">不完全</span>
+        <h3>Fukansai
+          <em>· Imperfección ·</em>
+        </h3>
+        <p>
+          Lo asimétrico tiene alma. Una vasija con el borde irregular, una caligrafía
+          con temblor en el trazo, una composición que rechaza el equilibrio exacto.
+          La imperfección no es defecto: es firma.
+        </p>
+      </div>
+
+      <div class="wabi-card reveal" style="--delay: 150ms;">
+        <span class="wabi-kanji">無常</span>
+        <h3>Mujō
+          <em>· Impermanencia ·</em>
+        </h3>
+        <p>
+          Todo fluye. Las hojas caen, la madera se agrieta, el metal se oxida.
+          Aceptar lo efímero no es resignación: es atención plena al instante
+          que se desvanece mientras lo miras.
+        </p>
+      </div>
+
+      <div class="wabi-card reveal" style="--delay: 300ms;">
+        <span class="wabi-kanji">寂</span>
+        <h3>Sabi
+          <em>· Pátina ·</em>
+        </h3>
+        <p>
+          El tiempo esculpe. La cerámica cuarteada reparada con oro — <em>kintsugi</em> —,
+          el bronce verdoso, la piedra gastada por el río. La edad no resta:
+          añade profundidad que ninguna mano joven puede falsificar.
+        </p>
+      </div>
+    </div>
+
+    <!-- ENSO — círculo caligráfico -->
+    <div class="enso-container reveal">
+      <svg class="enso-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <path class="enso-circle"
+          d="M110,30 C148,28 185,62 190,105 C195,155 148,192 108,192
+             C75,192 38,172 28,140 C18,100 35,48 72,38 C98,32 122,42 138,58"
+          stroke-linecap="round"
+          fill="none" />
+      </svg>
+    </div>
+    <p class="enso-caption reveal">
+      Enso — el círculo imperfecto que encierra el vacío.<br>
+      Un solo trazo, una sola respiración.
+    </p>
+
+    <!-- HAIKU -->
+    <div class="wabi-haiku reveal">
+      <span class="haiku-line">古池や</span>
+      <span class="haiku-line">El viejo estanque —</span>
+      <span class="haiku-line">蛙飛び込む</span>
+      <span class="haiku-line">salta una rana,</span>
+      <span class="haiku-line">水の音</span>
+      <span class="haiku-line">el sonido del agua.</span>
+      <p style="color:var(--aokezuri); font-size:0.8rem; margin-top:1rem; opacity:0.6;">— Matsuo Bashō, 1686</p>
+    </div>
+
+    <!-- KINTSUGI BOWL -->
+    <div class="wabi-bowl-container reveal">
+      <svg class="wabi-bowl" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+        <!-- Cuenco partido en dos -->
+        <path class="bowl-body"
+          d="M15,60 C5,70 8,140 45,152 L108,152 L108,145 L48,145 C18,135 18,75 25,62 Z" />
+        <path class="bowl-body"
+          d="M205,60 C215,70 212,140 175,152 L112,152 L112,145 L172,145 C202,135 202,75 195,62 Z" />
+        <!-- Base del cuenco -->
+        <ellipse cx="110" cy="64" rx="12" ry="7" fill="oklch(0.3 0.04 70)" stroke="var(--kuchiba)" stroke-width="0.5" opacity="0.6" />
+        <!-- Costura kintsugi -->
+        <path class="kintsugi-seam"
+          d="M110,70 C112,90 108,120 110,145" />
+        <path class="kintsugi-seam-thin"
+          d="M108,68 C104,85 112,110 107,135" />
+        <path class="kintsugi-seam-thin"
+          d="M113,72 C118,95 106,125 113,140" />
+        <!-- Borde superior ondulado -->
+        <path d="M25,62 C45,54 65,68 85,59 C105,50 108,62 110,62 C112,62 115,50 135,59 C155,68 175,54 195,62"
+          fill="none" stroke="var(--kuchiba)" stroke-width="0.8" opacity="0.5" />
+      </svg>
+    </div>
+    <p class="enso-caption reveal">
+      Kintsugi — reparar con oro, no ocultar la herida.<br>
+      Las cicatrices son el mapa de una historia.
+    </p>
+
+    <!-- Forma orgánica SVG -->
+    <div class="wabi-organic-container reveal">
+      <div class="wabi-ripple"></div>
+      <div class="wabi-ripple"></div>
+      <div class="wabi-ripple"></div>
+      <svg class="wabi-stone" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path class="stone-body"
+          d="M100,15 C148,12 185,52 190,100 C195,148 152,188 100,192 C48,196 10,152 8,100 C6,48 45,18 100,15 Z" />
+        <path class="stone-vein"
+          d="M40,80 C55,70 70,95 100,90 C130,85 145,60 165,75" />
+        <path class="stone-vein"
+          d="M30,120 C60,110 80,140 110,130 C140,120 160,145 180,135" />
+        <circle cx="100" cy="100" r="3" fill="var(--kuchiba)" opacity="0.4" />
+      </svg>
+    </div>
+
+    <p class="reveal" style="text-align:center; color:var(--aokezuri); font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; margin-top:2.5rem;">
+      «La belleza está en la grieta, no a pesar de ella»
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
      MARQUEE
      ═══════════════════════════════════════════ -->
 <div class="marquee-strip">
   <div class="marquee-inner">
-    ▲ BAUHAUS ▼ ART DECÓ ▲ GEOMETRIE ▼ ANIMATION ▲ EASING ▼ 1925 ▲ GOLD ▼ KREIS ▲ QUADRAT ▼ DREIECK ▲
-    BAUHAUS ▼ ART DECÓ ▲ GEOMETRIE ▼ ANIMATION ▲ EASING ▼ 1925 ▲ GOLD ▼ KREIS ▲ QUADRAT ▼ DREIECK ▲
+    ▲ BAUHAUS ▼ ART DECÓ ▲ WABI-SABI ▼ GEOMETRIE ▲ ANIMATION ▼ EASING ▲ 侘寂 ▼ 1925 ▲ KINTSUGI ▼ KREIS ▲ IMPERMANENZ ▼
+    BAUHAUS ▼ ART DECÓ ▲ WABI-SABI ▼ GEOMETRIE ▲ ANIMATION ▼ EASING ▲ 侘寂 ▼ 1925 ▲ KINTSUGI ▼ KREIS ▲ IMPERMANENZ ▼
   </div>
 </div>
 
@@ -688,11 +1282,21 @@
      TIMELINE
      ═══════════════════════════════════════════ -->
 <section class="timeline">
-  <div class="container">
+  <div class="container" style="position:relative;">
+    <span class="section-numeral" style="color:oklch(1 1 0 / 0.06);">IV</span>
     <p class="section-label" style="color:var(--silver);">· Cronología ·</p>
     <h2 class="section-heading" style="color:var(--cream); margin-bottom:4rem;">
-      Dos mundos,<br>una geometría
+      Tres miradas,<br>una belleza
     </h2>
+
+    <div class="timeline-item-wabi">
+      <div></div>
+      <div class="timeline-dot-wabi"></div>
+      <div class="timeline-text-right">
+        <h3 style="color:var(--kuchiba); font-size:1.8rem;">700 d.C.</h3>
+        <p style="color:var(--silver);">La estética zen japonesa<br>siembra el wabi-sabi</p>
+      </div>
+    </div>
 
     <div class="timeline-item">
       <div class="timeline-text-left">
@@ -732,15 +1336,15 @@
     <div class="grid-3" style="text-align:center;">
       <div class="reveal">
         <div class="stat-number" data-target="106">0</div>
-        <p style="color:var(--silver); margin-top:0.5rem;">años del Bauhaus</p>
+        <p style="color:var(--silver); margin-top:0.5rem;">años de la Bauhaus (1919–2025)</p>
       </div>
       <div class="reveal">
         <div class="stat-number" data-target="3">0</div>
-        <p style="color:var(--silver); margin-top:0.5rem;">colores primarios</p>
+        <p style="color:var(--silver); margin-top:0.5rem;">colores primarios Bauhaus</p>
       </div>
       <div class="reveal">
         <div class="stat-number" data-target="100">0</div>
-        <p style="color:var(--silver); margin-top:0.5rem;">años del Art Decó</p>
+        <p style="color:var(--silver); margin-top:0.5rem;">años desde la Expo de 1925</p>
       </div>
     </div>
   </div>
@@ -755,14 +1359,39 @@
     <h2 class="section-heading reveal" style="margin-top:1rem;">
       Form und Ornament
     </h2>
-    <p style="color:oklch(0.3 0.04 260); margin-bottom:2rem; font-size:1.1rem;">
-      Cada easing cuenta una historia. Cada forma tiene un alma.
+    <p style="color:oklch(0.3 0.04 260); margin-bottom:2rem; font-size:1.1rem; max-width:550px; margin-left:auto; margin-right:auto;">
+      Geometría que respira. Lujo que no grita. Imperfección que conmueve.<br>
+      Tres miradas, una sola verdad estética.
     </p>
     <button class="cta-button" onclick="document.querySelector('.hero-section').scrollIntoView({behavior:'smooth'})">
       Volver al inicio
     </button>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════
+     COLOFÓN
+     ═══════════════════════════════════════════ -->
+<footer class="colophon">
+  <div class="container">
+    <div class="deco-rule" style="margin:0 auto 2rem;"></div>
+    <p style="font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--charcoal); margin-bottom:0.5rem;">
+      Art Decó × Bauhaus × Wabi-Sabi
+    </p>
+    <p style="font-size:0.75rem; color:var(--bronze); letter-spacing:0.2em; text-transform:uppercase;">
+      Tipografía: Playfair Display, Inter, Cormorant Garamond, Noto Serif JP
+    </p>
+    <p style="font-size:0.7rem; color:oklch(0.3 0.04 260 / 0.5); margin-top:1.5rem; max-width:500px; margin-left:auto; margin-right:auto;">
+      Compuesto con CSS moderno: <code>@layer</code> para organización en cascada, <code>oklch()</code> para color perceptualmente uniforme,
+      <code>cubic-bezier()</code> para curvas de animación, <code>view-timeline</code> para animaciones en scroll,
+      <code>IntersectionObserver</code> para revelado progresivo. Sin frameworks, sin dependencias.
+    </p>
+    <p style="font-size:0.65rem; color:oklch(0.3 0.04 260 / 0.3); margin-top:2rem;">
+      Haiku de Matsuo Bashō (1644–1694) · Enso según la escuela Rinzai · Kintsugi, tradición japonesa del siglo XV<br>
+      Bauhaus, Weimar 1919–1933 · Exposition Internationale des Arts Décoratifs, París 1925
+    </p>
+  </div>
+</footer>
 
 <!-- ═══════════════════════════════════════════
      SCRIPTS
@@ -794,7 +1423,7 @@
 
       const el = entry.target;
       const target = parseInt(el.dataset.target);
-      const duration = 2000; // ms
+      const duration = 4000; // ms
       const start = performance.now();
 
       function easeOutExpo(t) {
@@ -836,9 +1465,10 @@
     });
   });
 
-  console.log('✨ Art Decó × Bauhaus — Animaciones con Easing');
-  console.log('   Curvas: spring, bounce, smooth, deco');
-  console.log('   Técnicas: @layer, oklch(), Intersection Observer, cubic-bezier()');
+  console.log('✦ Art Decó × Bauhaus × Wabi-Sabi — Edición académica');
+  console.log('  Secciones: Manifiesto · Interaktion · Wabi-Sabi · Cronología · Colofón');
+  console.log('  Técnicas: @layer · oklch() · cubic-bezier() · view-timeline · IntersectionObserver');
+  console.log('  Tipografías: Playfair Display · Inter · Cormorant Garamond · Noto Serif JP');
 </script>
 
 </body>
