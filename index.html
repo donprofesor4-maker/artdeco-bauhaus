@@ -577,6 +577,60 @@
     }
     .cta-button:hover::before { transform: translateX(100%); }
 
+    /* ── CUSTOM CURSOR ───────────────────── */
+    .custom-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      transition: width 0.4s var(--ease-spring), height 0.4s var(--ease-spring),
+                  background 0.6s var(--ease-wabi), border-color 0.6s var(--ease-wabi),
+                  border-radius 1s var(--ease-wabi), opacity 0.3s;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Cursor por defecto — discreto */
+    .custom-cursor.default {
+      width: 12px; height: 12px;
+      background: white;
+      border: none;
+    }
+
+    /* Hero — círculo Bauhaus */
+    .custom-cursor.bauhaus {
+      width: 44px; height: 44px;
+      background: oklch(0.58 0.23 30 / 0.6);
+      border: 2px solid white;
+    }
+
+    /* Wabi-Sabi — forma orgánica */
+    .custom-cursor.wabi {
+      width: 38px; height: 38px;
+      background: oklch(0.52 0.08 50 / 0.5);
+      border: 1px solid oklch(0.72 0.10 82 / 0.6);
+      border-radius: 60% 40% 55% 45% / 40% 55% 45% 60%;
+      animation: cursor-organic 4s var(--ease-smooth) infinite;
+    }
+
+    @keyframes cursor-organic {
+      0%, 100% { border-radius: 60% 40% 55% 45% / 40% 55% 45% 60%; }
+      33%       { border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%; }
+      66%       { border-radius: 50% 50% 42% 58% / 48% 52% 48% 52%; }
+    }
+
+    /* Sobre enlaces/botones — cursor pointer */
+    .custom-cursor.pointer {
+      width: 28px; height: 28px;
+      background: white;
+      border: 1px solid oklch(1 1 1 / 0.3);
+      mix-blend-mode: normal;
+    }
+
+    @media (max-width: 768px), (pointer: coarse) {
+      .custom-cursor { display: none; }
+    }
+
     /* ── COLOFÓN ─────────────────────────── */
     .colophon {
       text-align: center;
@@ -598,6 +652,116 @@
       margin: 0 auto 2rem;
       width: 40px;
       background: linear-gradient(90deg, var(--gold), oklch(0.78 0.14 95 / 0.2));
+    }
+
+    /* ── SOUND TOGGLE ────────────────────── */
+    .sound-toggle {
+      position: absolute;
+      top: 2rem; right: 2rem;
+      z-index: 10;
+      background: oklch(0.96 0.01 85 / 0.8);
+      border: 1px solid oklch(0 0 0 / 0.08);
+      border-radius: 50%;
+      width: 40px; height: 40px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.4s var(--ease-smooth);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      color: var(--aokezuri);
+    }
+
+    .sound-toggle:hover {
+      background: var(--washi);
+      border-color: var(--kinsugi);
+      transform: scale(1.1);
+    }
+
+    .sound-toggle.active {
+      border-color: var(--kinsugi);
+      color: var(--kinsugi);
+      box-shadow: 0 0 12px oklch(0.72 0.10 82 / 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .sound-toggle { top: 1rem; right: 1rem; }
+    }
+
+    /* ── TYPOGRAPHY SPECIMEN ─────────────── */
+    .specimen-section {
+      background: var(--cream);
+      padding: 8rem 2rem;
+      position: relative;
+    }
+
+    .specimen-block {
+      margin-bottom: 5rem;
+      border-bottom: 1px solid oklch(0 0 0 / 0.06);
+      padding-bottom: 2rem;
+    }
+
+    .specimen-block:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .specimen-family {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 0.5rem;
+    }
+
+    .specimen-sample {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+
+    .specimen-weights {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+      font-size: 1.1rem;
+      color: var(--aokezuri);
+    }
+
+    .specimen-weights span {
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+
+    .specimen-weights span:hover {
+      opacity: 1;
+      color: var(--charcoal);
+    }
+
+    .specimen-glyphs {
+      font-size: 0.85rem;
+      color: oklch(0.3 0.04 260 / 0.4);
+      margin-top: 0.75rem;
+      font-feature-settings: "ss01", "liga";
+    }
+
+    /* Playfair */
+    .specimen-playfair .specimen-sample {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Inter */
+    .specimen-inter .specimen-sample {
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    /* Cormorant */
+    .specimen-cormorant .specimen-sample {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+
+    /* Noto JP */
+    .specimen-noto .specimen-sample {
+      font-family: 'Noto Serif JP', serif;
     }
 
     /* ── DECO PATTERN SECTION ────────────── */
@@ -1031,6 +1195,7 @@
 </style>
 </head>
 <body>
+<div class="custom-cursor default" id="customCursor" aria-hidden="true"></div>
 
 <!-- ═══════════════════════════════════════════
      HERO
@@ -1128,6 +1293,7 @@
      ═══════════════════════════════════════════ -->
 <section class="wabi-section">
   <div class="wabi-texture"></div>
+  <button class="sound-toggle" id="soundToggle" title="Sonido ambiente" aria-label="Activar sonido de cuenco">🔇</button>
   <div class="petals-layer">
     <div class="petal"></div><div class="petal"></div><div class="petal"></div>
     <div class="petal"></div><div class="petal"></div><div class="petal"></div>
@@ -1370,6 +1536,68 @@
 </section>
 
 <!-- ═══════════════════════════════════════════
+     ESPÉCIMEN TIPOGRÁFICO
+     ═══════════════════════════════════════════ -->
+<section class="specimen-section">
+  <div class="container">
+    <p class="section-label" style="color:var(--bronze);">· Espécimen Tipográfico ·</p>
+
+    <div class="specimen-block specimen-playfair reveal">
+      <p class="specimen-family">Playfair Display · Serif · Display</p>
+      <p class="specimen-sample">The quick brown fox<br>jumps over the lazy dog</p>
+      <div class="specimen-weights">
+        <span style="font-family:'Playfair Display',serif; font-weight:400;">Regular</span>
+        <span style="font-family:'Playfair Display',serif; font-weight:700;">Bold</span>
+        <span style="font-family:'Playfair Display',serif; font-weight:900;">Black</span>
+      </div>
+      <p class="specimen-glyphs" style="font-family:'Playfair Display',serif;">
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ · abcdefghijklmnopqrstuvwxyz · 0123456789 · fi fl ff ffi ffl · & © § ¶
+      </p>
+    </div>
+
+    <div class="specimen-block specimen-inter reveal">
+      <p class="specimen-family">Inter · Sans-Serif · UI / Cuerpo</p>
+      <p class="specimen-sample">Form follows function<br>— but emotion follows form</p>
+      <div class="specimen-weights">
+        <span style="font-family:'Inter',sans-serif; font-weight:400;">Regular</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:500;">Medium</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:700;">Bold</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:900;">Black</span>
+      </div>
+      <p class="specimen-glyphs" style="font-family:'Inter',sans-serif;">
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ · abcdefghijklmnopqrstuvwxyz · 0123456789 · ½ ¼ ¾ · ←↑→↓ · € £ ¥
+      </p>
+    </div>
+
+    <div class="specimen-block specimen-cormorant reveal">
+      <p class="specimen-family">Cormorant Garamond · Serif · Itálica / Citas</p>
+      <p class="specimen-sample">«Nothing is permanent,<br>nothing is finished,<br>nothing is perfect.»</p>
+      <div class="specimen-weights">
+        <span style="font-family:'Cormorant Garamond',serif; font-weight:400; font-style:normal;">Regular</span>
+        <span style="font-family:'Cormorant Garamond',serif; font-weight:600; font-style:normal;">Semibold</span>
+        <span style="font-family:'Cormorant Garamond',serif; font-weight:400; font-style:italic;">Italic</span>
+        <span style="font-family:'Cormorant Garamond',serif; font-weight:600; font-style:italic;">Semibold Italic</span>
+      </div>
+      <p class="specimen-glyphs" style="font-family:'Cormorant Garamond',serif;">
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ · abcdefghijklmnopqrstuvwxyz · 0123456789 · Th Qu st ct · « » — …
+      </p>
+    </div>
+
+    <div class="specimen-block specimen-noto reveal">
+      <p class="specimen-family">Noto Serif JP · Serif · Kanji / Japonés</p>
+      <p class="specimen-sample">侘寂 ・ 不完全 ・ 無常<br>花鳥風月 ・ 一期一会</p>
+      <div class="specimen-weights">
+        <span style="font-family:'Noto Serif JP',serif; font-weight:400;">Regular</span>
+        <span style="font-family:'Noto Serif JP',serif; font-weight:700;">Bold</span>
+      </div>
+      <p class="specimen-glyphs" style="font-family:'Noto Serif JP',serif;">
+        あいうえお かきくけこ · アイウエオ カキクケコ · 一二三四五六七八九十 · 「」『』【】 · 、。・
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
      COLOFÓN
      ═══════════════════════════════════════════ -->
 <footer class="colophon">
@@ -1398,7 +1626,13 @@
      ═══════════════════════════════════════════ -->
 <script>
   // ==========================================
-  // REVEAL ON SCROLL
+  // 0. DETECTAR DISPOSITIVO (touch vs mouse)
+  // ==========================================
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
+  const cursor = document.getElementById('customCursor');
+
+  // ==========================================
+  // 1. REVEAL ON SCROLL
   // ==========================================
   const revealEls = document.querySelectorAll('.reveal');
 
@@ -1413,7 +1647,7 @@
   revealEls.forEach(el => observer.observe(el));
 
   // ==========================================
-  // COUNTER ANIMATION (cuando son visibles)
+  // 2. COUNTER ANIMATION
   // ==========================================
   const stats = document.querySelectorAll('.stat-number');
 
@@ -1423,7 +1657,7 @@
 
       const el = entry.target;
       const target = parseInt(el.dataset.target);
-      const duration = 4000; // ms
+      const duration = 4000;
       const start = performance.now();
 
       function easeOutExpo(t) {
@@ -1451,7 +1685,53 @@
   stats.forEach(el => countObserver.observe(el));
 
   // ==========================================
-  // PARALLAX SUAVE EN SHAPES DEL HERO
+  // 3. CUSTOM CURSOR
+  // ==========================================
+  if (!isTouchDevice && cursor) {
+    const heroSection = document.querySelector('.hero-section');
+    const wabiSection = document.querySelector('.wabi-section');
+    let cursorX = 0, cursorY = 0;
+    let currentClass = 'default';
+
+    function getCursorClass(x, y) {
+      // Detectar si está sobre elemento interactivo
+      const el = document.elementFromPoint(x, y);
+      if (el && (el.tagName === 'A' || el.tagName === 'BUTTON' || el.tagName === 'INPUT' ||
+          el.tagName === 'TEXTAREA' || el.closest('a') || el.closest('button') ||
+          el.classList.contains('shape-showcase') || el.classList.contains('sound-toggle') ||
+          el.classList.contains('cta-button') || el.closest('.wabi-card'))) {
+        return 'pointer';
+      }
+
+      // Detectar sección wabi-sabi → cursor orgánico
+      if (wabiSection) {
+        const wabiRect = wabiSection.getBoundingClientRect();
+        if (y >= wabiRect.top && y <= wabiRect.bottom) return 'wabi';
+      }
+      return 'default';
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+
+      const newClass = getCursorClass(e.clientX, e.clientY);
+      if (newClass !== currentClass) {
+        cursor.className = 'custom-cursor ' + newClass;
+        currentClass = newClass;
+      }
+    });
+
+    // Ocultar cursor al salir de la ventana
+    document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+    document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
+  }
+
+  // ==========================================
+  // 4. PARALLAX SUAVE EN SHAPES DEL HERO
+  //    (fusionado con el mousemove del cursor)
   // ==========================================
   const shapes = document.querySelectorAll('.shape');
 
@@ -1465,10 +1745,167 @@
     });
   });
 
+  // ==========================================
+  // 5. ENSO — dibujo orgánico con scroll
+  // ==========================================
+  const ensoCircle = document.querySelector('.enso-circle');
+  if (ensoCircle) {
+    const totalLength = 800;
+    let lastScrollY = window.scrollY;
+    let lastTime = performance.now();
+    let ensoProgress = 0; // 0 (invisible) → 1 (completamente dibujado)
+    const ensoContainer = ensoCircle.closest('.enso-container');
+
+    ensoCircle.style.strokeDasharray = totalLength;
+    ensoCircle.style.strokeDashoffset = totalLength;
+    ensoCircle.style.opacity = '0';
+    ensoCircle.style.animation = 'none'; // quitamos la animación CSS
+
+    function updateEnso() {
+      if (!ensoContainer) return;
+
+      const rect = ensoContainer.getBoundingClientRect();
+      const viewH = window.innerHeight;
+
+      // Qué tanto del contenedor está en viewport (-1 = arriba, 0 = entra, 1 = sale)
+      const entryPoint = viewH * 0.75; // empieza a dibujarse al 75% del viewport
+      const exitPoint = viewH * 0.2;   // termina al 20%
+      const raw = (entryPoint - rect.top) / (entryPoint - exitPoint);
+      const clamped = Math.max(0, Math.min(1, raw));
+
+      // Velocidad de scroll para modular la velocidad del trazo
+      const now = performance.now();
+      const dt = Math.max(16, now - lastTime);
+      const scrollDelta = Math.abs(window.scrollY - lastScrollY);
+      const scrollSpeed = scrollDelta / dt; // px/ms
+
+      // Más rápido el scroll → avanza más rápido el enso (pero con límites)
+      const speedFactor = 0.1 + Math.min(scrollSpeed * 0.8, 0.9);
+
+      if (clamped > ensoProgress) {
+        ensoProgress = Math.min(clamped, ensoProgress + speedFactor * 0.008);
+      } else {
+        ensoProgress = clamped;
+      }
+
+      const offset = totalLength * (1 - ensoProgress);
+      ensoCircle.style.strokeDashoffset = offset;
+      ensoCircle.style.opacity = ensoProgress > 0.01 ? Math.min(0.35, ensoProgress * 0.5) : '0';
+
+      lastScrollY = window.scrollY;
+      lastTime = now;
+
+      requestAnimationFrame(updateEnso);
+    }
+
+    requestAnimationFrame(updateEnso);
+  }
+
+  // ==========================================
+  // 6. SONIDO DE CUENCO TIBETANO
+  // ==========================================
+  const soundToggle = document.getElementById('soundToggle');
+  if (soundToggle) {
+    let audioCtx = null;
+    let soundEnabled = false;
+
+    function playBowl() {
+      if (!soundEnabled) return;
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      const now = audioCtx.currentTime;
+
+      // Frecuencias de cuenco tibetano (fundamental + armónicos)
+      const frequencies = [
+        { freq: 220, gain: 0.25, detune: 0 },
+        { freq: 554, gain: 0.12, detune: 3 },
+        { freq: 1108, gain: 0.06, detune: -5 },
+        { freq: 2100, gain: 0.03, detune: 8 },
+        { freq: 3500, gain: 0.015, detune: -2 },
+      ];
+
+      frequencies.forEach(({ freq, gain: g, detune }) => {
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.setTargetAtTime(freq * 1.002, now + 0.5, 2);
+        if (detune) osc.detune.setValueAtTime(detune, now);
+
+        gainNode.gain.setValueAtTime(g, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 6);
+
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 6);
+      });
+
+      // Golpe inicial (ruido filtrado simulando el mazo)
+      const bufferSize = audioCtx.sampleRate * 0.08;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.1));
+      }
+      const noise = audioCtx.createBufferSource();
+      const noiseGain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+      noise.buffer = buffer;
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(800, now);
+      filter.Q.setValueAtTime(0.8, now);
+      noiseGain.gain.setValueAtTime(0.1, now);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+      noise.connect(filter);
+      filter.connect(noiseGain);
+      noiseGain.connect(audioCtx.destination);
+      noise.start(now);
+      noise.stop(now + 0.3);
+    }
+
+    // Detectar entrada a la sección wabi-sabi
+    const wabiSection = document.querySelector('.wabi-section');
+    let wasInWabi = false;
+
+    const wabiObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !wasInWabi) {
+          wasInWabi = true;
+          if (soundEnabled) playBowl();
+        }
+        if (!entry.isIntersecting) {
+          wasInWabi = false;
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (wabiSection) wabiObserver.observe(wabiSection);
+
+    soundToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      soundToggle.classList.toggle('active', soundEnabled);
+      soundToggle.textContent = soundEnabled ? '🔔' : '🔇';
+      soundToggle.setAttribute('aria-label', soundEnabled ? 'Desactivar sonido' : 'Activar sonido de cuenco');
+
+      if (soundEnabled) {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        // Tocar suavecito para confirmar activación
+        setTimeout(() => playBowl(), 100);
+      }
+    });
+  }
+
   console.log('✦ Art Decó × Bauhaus × Wabi-Sabi — Edición académica');
-  console.log('  Secciones: Manifiesto · Interaktion · Wabi-Sabi · Cronología · Colofón');
-  console.log('  Técnicas: @layer · oklch() · cubic-bezier() · view-timeline · IntersectionObserver');
-  console.log('  Tipografías: Playfair Display · Inter · Cormorant Garamond · Noto Serif JP');
+  console.log('  Secciones: Manifiesto · Interaktion · Wabi-Sabi · Cronología · Espécimen · Colofón');
+  console.log('  Features: cursor contextual · enso scroll-driven · sonido de cuenco tibetano');
+  console.log('  Técnicas: @layer · oklch() · cubic-bezier() · Web Audio API · IntersectionObserver');
 </script>
 
 </body>
