@@ -85,6 +85,31 @@
     @media (max-width: 768px) {
       .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
       section { padding: 3rem 1rem; }
+
+      /* Hero shapes reducidos */
+      .shape-circle { width: 60px; height: 60px; top: 10%; left: 5%; }
+      .shape-square { width: 50px; height: 50px; top: 55%; right: 3%; }
+      .shape-triangle {
+        border-left-width: 30px; border-right-width: 30px;
+        border-bottom-width: 55px; top: 15%; right: 10%;
+      }
+      .shape-ring { width: 50px; height: 50px; border-width: 4px; bottom: 15%; left: 5%; }
+      .shape-half-circle { width: 80px; height: 40px; border-radius: 0 0 80px 80px; bottom: 5%; right: 20%; }
+
+      /* Hero heading */
+      .hero-content h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+      .subtitle { font-size: 0.8rem; letter-spacing: 0.2em; }
+
+      /* Specimen */
+      .specimen-weights { gap: 1rem; font-size: 0.9rem; }
+      .section-numeral { font-size: 3rem; top: -1rem; left: -0.5rem; }
+
+      /* Timeline */
+      .timeline::before { left: 24px; }
+      .timeline-item, .timeline-item-wabi { grid-template-columns: 40px 1fr; gap: 1rem; }
+      .timeline-text-left, .timeline-text-right { text-align: left; grid-column: 2; }
+      .timeline-item > :first-child:not(.timeline-dot):not(.timeline-dot-wabi) { display: none; }
+      .timeline-item > :empty { display: none; }
     }
   }
 
@@ -387,7 +412,8 @@
       animation-range: entry 0% cover 40%;
     }
 
-    .deco-card:hover {
+    .deco-card:hover,
+    .deco-card.tapped {
       transform: translateY(-4px) scale(1.01);
       box-shadow: 0 12px 40px oklch(0 0 0 / 0.08);
     }
@@ -401,7 +427,8 @@
       opacity: 0;
       transition: opacity 0.4s var(--ease-smooth);
     }
-    .deco-card:hover::before { opacity: 1; }
+    .deco-card:hover::before,
+    .deco-card.tapped::before { opacity: 1; }
 
     /* ── GALERÍA DE FORMAS ───────────────── */
     .shapes-gallery {
@@ -421,7 +448,8 @@
       animation-range: entry 0% cover 30%;
     }
 
-    .shape-showcase:hover { transform: scale(1.03); z-index: 10; }
+    .shape-showcase:hover,
+    .shape-showcase.tapped { transform: scale(1.03); z-index: 10; }
 
     .shape-showcase .inner-shape { transition: all 1s var(--ease-deco); }
 
@@ -432,7 +460,8 @@
       background: var(--rot);
       transition: all 1s var(--ease-spring);
     }
-    .shape-showcase:hover .shape-bauhaus-circle {
+    .shape-showcase:hover .shape-bauhaus-circle,
+    .shape-showcase.tapped .shape-bauhaus-circle {
       border-radius: 0;
       transform: rotate(45deg);
       background: var(--gelb);
@@ -444,7 +473,8 @@
       background: var(--blau);
       transition: all 1s var(--ease-bounce);
     }
-    .shape-showcase:hover .shape-bauhaus-square {
+    .shape-showcase:hover .shape-bauhaus-square,
+    .shape-showcase.tapped .shape-bauhaus-square {
       border-radius: 50%;
       transform: scale(1.15) rotate(90deg);
       background: var(--rot);
@@ -458,7 +488,8 @@
       border-bottom: 90px solid var(--gelb);
       transition: all 1.2s var(--ease-deco);
     }
-    .shape-showcase:hover .shape-bauhaus-triangle {
+    .shape-showcase:hover .shape-bauhaus-triangle,
+    .shape-showcase.tapped .shape-bauhaus-triangle {
       border-bottom-color: var(--blau);
       transform: scale(1.15) rotate(60deg);
     }
@@ -478,7 +509,8 @@
       border: 2px solid oklch(0.78 0.14 95 / 0.4);
       transition: all 1s var(--ease-smooth);
     }
-    .shape-showcase:hover .shape-deco-rings {
+    .shape-showcase:hover .shape-deco-rings,
+    .shape-showcase.tapped .shape-deco-rings {
       transform: rotate(90deg) scale(1.08);
       border-color: var(--silver);
       box-shadow: 0 0 40px oklch(0.78 0.14 95 / 0.3);
@@ -915,7 +947,8 @@
       );
     }
 
-    .wabi-card:hover {
+    .wabi-card:hover,
+    .wabi-card.tapped {
       transform: translateY(-6px);
       box-shadow: 0 16px 40px oklch(0 0 0 / 0.08);
       border-color: oklch(0.72 0.10 82 / 0.3);
@@ -940,7 +973,8 @@
       transition: opacity 0.8s var(--ease-wabi);
       pointer-events: none;
     }
-    .wabi-card:hover::after { opacity: 1; animation: kinsugi-glow 8s var(--ease-smooth) infinite; }
+    .wabi-card:hover::after,
+    .wabi-card.tapped::after { opacity: 1; animation: kinsugi-glow 8s var(--ease-smooth) infinite; }
 
     .wabi-card .wabi-kanji {
       font-family: 'Noto Serif JP', serif;
@@ -993,7 +1027,8 @@
       transition: fill 1.2s var(--ease-wabi), stroke 1.2s var(--ease-wabi);
     }
 
-    .wabi-organic-container:hover .stone-body {
+    .wabi-organic-container:hover .stone-body,
+    .wabi-organic-container.tapped .stone-body {
       fill: oklch(0.52 0.08 50 / 0.2);
       stroke: var(--kuchiba);
     }
@@ -1100,7 +1135,8 @@
       transition: fill 1.8s var(--ease-wabi);
     }
 
-    .wabi-bowl-container:hover .bowl-body {
+    .wabi-bowl-container:hover .bowl-body,
+    .wabi-bowl-container.tapped .bowl-body {
       fill: oklch(0.42 0.06 75);
     }
 
@@ -1901,6 +1937,26 @@
       }
     });
   }
+
+  // ==========================================
+  // 6.5. TOGGLE TÁCTIL para elementos hover
+  // ==========================================
+  const tappableSelectors = '.shape-showcase, .deco-card, .wabi-card, .wabi-bowl-container, .wabi-organic-container';
+  const tappableEls = document.querySelectorAll(tappableSelectors);
+
+  tappableEls.forEach(el => {
+    el.addEventListener('click', function(e) {
+      // Solo en touch o si fue un click real (no iniciado por hover emulation)
+      this.classList.toggle('tapped');
+    });
+  });
+
+  // Quitar tapped al tocar fuera
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest(tappableSelectors)) {
+      tappableEls.forEach(el => el.classList.remove('tapped'));
+    }
+  });
 
   console.log('✦ Art Decó × Bauhaus × Wabi-Sabi — Edición académica');
   console.log('  Secciones: Manifiesto · Interaktion · Wabi-Sabi · Cronología · Espécimen · Colofón');
