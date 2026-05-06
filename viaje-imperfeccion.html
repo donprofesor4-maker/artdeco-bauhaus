@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minimalista, lento, imperfecto, y completamente consciente de que la belleza está en lo que no cierra</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Serif+JP:wght@400;700&family=Inter:wght@300;400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --stone:   oklch(0.42 0.02 95);
+    --ceruleo: oklch(0.52 0.06 225);
+    --kintsugi: oklch(0.68 0.12 82);
+    --earth:   oklch(0.48 0.05 70);
+    --washi:   oklch(0.94 0.02 90);
+    --ease-wabi: cubic-bezier(0.45, 0.8, 0.5, 1);
+    --ease-largo: cubic-bezier(0.2, 0, 0, 1);
+    --ease-breathe: cubic-bezier(0.6, 0, 0.4, 1);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--stone);
+    color: oklch(0.92 0.02 90);
+    overflow-x: hidden;
+    transition: background 1.2s var(--ease-breathe);
+    font-weight: 300;
+  }
+
+  /* ── SECCIONES ────────────────────────── */
+  section {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── COLORES DE FONDO POR SECCIÓN ─────── */
+  .sec-1 { background: var(--stone); }
+  .sec-2 { background: var(--ceruleo); }
+  .sec-3 { background: var(--earth); }
+  .sec-4 { background: var(--washi); color: oklch(0.2 0.02 95); }
+
+  .section-content {
+    max-width: 680px; text-align: center; position: relative; z-index: 2;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.6s var(--ease-wabi), transform 1.6s var(--ease-wabi);
+  }
+
+  .section-title.visible { opacity: 1; transform: translateY(0); }
+
+  .section-desc {
+    font-size: 1rem; line-height: 1.9; opacity: 0.7; max-width: 500px; margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.6s var(--ease-wabi) 0.3s, transform 1.6s var(--ease-wabi) 0.3s;
+  }
+
+  .section-desc.visible { opacity: 0.7; transform: translateY(0); }
+
+  .kanji-big {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(5rem, 12vw, 10rem);
+    font-weight: 400;
+    line-height: 1;
+    opacity: 0.06;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    white-space: nowrap;
+  }
+
+  /* ── ENSO ─────────────────────────────── */
+  .enso-container {
+    margin: 3rem 0;
+    display: flex; justify-content: center;
+  }
+
+  .enso-svg {
+    width: clamp(160px, 40vw, 260px); height: auto;
+  }
+
+  .enso-circle {
+    fill: none;
+    stroke: oklch(0.92 0.02 90 / 0.25);
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    transition: stroke-dashoffset 0.08s linear;
+    filter: blur(0.3px);
+  }
+
+  .enso-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 1.6s var(--ease-wabi) 0.6s;
+    color: oklch(0.92 0.02 90 / 0.5);
+  }
+
+  .enso-caption.visible { opacity: 0.5; }
+
+  /* ── HAIKU ────────────────────────────── */
+  .haiku-block {
+    margin: 3rem 0;
+    line-height: 2.6;
+  }
+
+  .haiku-line {
+    display: block;
+    font-size: 1.4rem;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 1s var(--ease-wabi), transform 1s var(--ease-wabi);
+  }
+
+  .haiku-line.visible { opacity: 1; transform: translateY(0); }
+
+  .haiku-line.kanji {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+  }
+
+  .haiku-line.es {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: oklch(0.92 0.02 90 / 0.6);
+  }
+
+  /* ── GOTAS DE AGUA ────────────────────── */
+  .water-drops {
+    position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    overflow: hidden;
+  }
+
+  .drop {
+    position: absolute;
+    width: 3px; height: 12px;
+    background: oklch(1 1 1 / 0.2);
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .drop.fall {
+    animation: drop-fall 2s var(--ease-wabi) forwards;
+  }
+
+  @keyframes drop-fall {
+    0%   { transform: translateY(-40px); opacity: 0; }
+    15%  { opacity: 0.5; }
+    100% { transform: translateY(60px); opacity: 0; }
+  }
+
+  .ripple {
+    position: absolute;
+    width: 4px; height: 4px;
+    border: 1px solid oklch(1 1 1 / 0.15);
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .ripple.expand {
+    animation: ripple-out 1.8s var(--ease-wabi) forwards;
+  }
+
+  @keyframes ripple-out {
+    0%   { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(25); opacity: 0; }
+  }
+
+  /* ── KINTSUGI BOWL ────────────────────── */
+  .bowl-container {
+    margin: 4rem 0;
+    display: flex; justify-content: center;
+  }
+
+  .bowl-svg {
+    width: clamp(200px, 50vw, 300px); height: auto;
+  }
+
+  .bowl-half {
+    fill: oklch(0.6 0.04 70 / 0.6);
+    stroke: oklch(0.7 0.06 75 / 0.4);
+    stroke-width: 0.8;
+  }
+
+  .kintsugi-line {
+    fill: none;
+    stroke: var(--kintsugi);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+  }
+
+  .kintsugi-line.drawn {
+    transition: stroke-dashoffset 2s var(--ease-largo);
+    stroke-dashoffset: 0;
+  }
+
+  .kintsugi-glow {
+    fill: none;
+    stroke: var(--kintsugi);
+    stroke-width: 0.6;
+    stroke-linecap: round;
+    stroke-dasharray: 3 5;
+    opacity: 0;
+    transition: opacity 2s var(--ease-wabi) 1.5s;
+  }
+
+  .kintsugi-glow.visible { opacity: 0.5; }
+
+  /* ── CIERRE ───────────────────────────── */
+  .closing-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s var(--ease-wabi), transform 2s var(--ease-wabi);
+  }
+
+  .closing-quote.visible { opacity: 0.7; transform: translateY(0); }
+
+  /* ── PARTÍCULAS DORADAS ───────────────── */
+  .gold-particles {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+
+  .gold-particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--kintsugi);
+    border-radius: 50%;
+  }
+
+  .gold-particle.float {
+    animation: particle-float 8s var(--ease-breathe) infinite;
+  }
+
+  @keyframes particle-float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+    20%      { opacity: 0.4; }
+    50%      { transform: translateY(-30px) translateX(15px); opacity: 0.2; }
+    80%      { opacity: 0.1; }
+  }
+
+  @media (max-width: 768px) {
+    section { padding: 4rem 1.5rem; }
+    .haiku-line { font-size: 1.1rem; }
+    .haiku-line.kanji { font-size: 1.4rem; }
+    .haiku-line.es { font-size: 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .drop, .ripple, .gold-particle { display: none; }
+    .enso-circle { stroke-dashoffset: 0 !important; opacity: 0.35; }
+    .kintsugi-line { stroke-dashoffset: 0 !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ SECCIÓN 1: VACÍO ═══════════ -->
+<section class="sec-1" id="sec1">
+  <div class="kanji-big">無</div>
+  <div class="section-content">
+    <h2 class="section-title">Piedra húmeda</h2>
+    <p class="section-desc">
+      Gris de la materia prima. El vacío antes del gesto.
+      Aquí no hay forma todavía — solo la respiración que antecede al trazo.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ SECCIÓN 2: AGUA ═══════════ -->
+<section class="sec-2" id="sec2">
+  <div class="kanji-big">水</div>
+  <div class="water-drops" id="waterDrops"></div>
+
+  <div class="section-content">
+    <h2 class="section-title">Agua quieta</h2>
+    <p class="section-desc">
+      Azul cerúleo opaco. La superficie del estanque antes del salto.
+    </p>
+
+    <div class="enso-container">
+      <svg class="enso-svg" viewBox="0 0 260 260">
+        <path class="enso-circle" id="ensoPath"
+          d="M130,40 C168,36 215,72 220,125 C225,175 182,218 138,222
+             C100,225 52,202 42,165 C32,125 45,58 82,48 C108,42 125,52 140,65"
+          fill="none" />
+      </svg>
+    </div>
+    <p class="enso-caption">Enso — el círculo que nunca cierra</p>
+
+    <div class="haiku-block">
+      <span class="haiku-line kanji" data-delay="0">古池や</span>
+      <span class="haiku-line es" data-delay="1">el viejo estanque —</span>
+      <span class="haiku-line kanji" data-delay="2">蛙飛び込む</span>
+      <span class="haiku-line es" data-delay="3">salta una rana,</span>
+      <span class="haiku-line kanji" data-delay="4">水の音</span>
+      <span class="haiku-line es" data-delay="5">el sonido del agua.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SECCIÓN 3: CICATRICES ═══════ -->
+<section class="sec-3" id="sec3">
+  <div class="kanji-big">金</div>
+  <div class="gold-particles" id="goldParticles"></div>
+
+  <div class="section-content">
+    <h2 class="section-title">Kintsugi</h2>
+    <p class="section-desc">
+      Dorado sobre tierra. Lo que se rompió y fue reparado con oro.
+      La cicatriz no se oculta: se ilumina.
+    </p>
+
+    <div class="bowl-container">
+      <svg class="bowl-svg" viewBox="0 0 300 180">
+        <!-- Mitad izquierda -->
+        <path class="bowl-half"
+          d="M30,75 C20,88 25,165 60,175 L148,175 L148,165 L58,165 C35,155 35,90 40,78 Z" />
+        <!-- Mitad derecha -->
+        <path class="bowl-half"
+          d="M270,75 C280,88 275,165 240,175 L152,175 L152,165 L242,165 C265,155 265,90 260,78 Z" />
+        <!-- Base -->
+        <ellipse cx="150" cy="80" rx="14" ry="8" fill="oklch(0.5 0.04 70 / 0.4)" />
+        <!-- Costura kintsugi principal -->
+        <path class="kintsugi-line" id="kintsugiMain"
+          d="M150,85 C152,108 148,138 150,168" />
+        <!-- Costuras secundarias -->
+        <path class="kintsugi-line" id="kintsugiSec1"
+          d="M148,82 C143,105 152,130 147,158" />
+        <path class="kintsugi-line" id="kintsugiSec2"
+          d="M153,88 C160,112 146,140 154,162" />
+        <!-- Brillo kintsugi -->
+        <path class="kintsugi-glow" id="kintsugiGlow"
+          d="M150,85 C152,108 148,138 150,168" />
+      </svg>
+    </div>
+    <p class="enso-caption">Kintsugi — reparar con oro, no ocultar la herida</p>
+  </div>
+</section>
+
+<!-- ═══════════ SECCIÓN 4: BLANCO ═══════════ -->
+<section class="sec-4" id="sec4">
+  <div class="kanji-big" style="opacity:0.04">空</div>
+  <div class="section-content">
+    <h2 class="section-title">Blanco roto</h2>
+    <p class="section-desc" style="color:oklch(0.2 0.02 95 / 0.7);">
+      Vuelta al vacío — pero con huellas. Como el papel que retuvo la tinta
+      después de que el poema fue escrito.
+    </p>
+    <p class="closing-quote">
+      «La belleza está en la grieta, no a pesar de ella»
+    </p>
+  </div>
+</section>
+
+<script>
+  // ==========================================
+  // PREFERS-REDUCED-MOTION — respeto
+  // ==========================================
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    // Forzar visibilidad inmediata sin transiciones
+    document.querySelectorAll('.section-title, .section-desc, .enso-caption, .closing-quote, .haiku-line, .kintsugi-glow')
+      .forEach(el => el.classList.add('visible'));
+
+    // Desactivar transiciones en el body
+    document.body.style.transition = 'none';
+  }
+
+  // ==========================================
+  // REVEAL ON SCROLL (IntersectionObserver)
+  // ==========================================
+  const revealEls = document.querySelectorAll('.section-title, .section-desc, .enso-caption, .closing-quote');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '0px 0px -50px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // ==========================================
+  // HAIKU — revelado progresivo con scroll
+  // ==========================================
+  if (!prefersReducedMotion) {
+    const haikuLines = document.querySelectorAll('.haiku-line');
+
+    const haikuObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const line = entry.target;
+          const delay = parseInt(line.dataset.delay) || 0;
+          setTimeout(() => {
+            line.classList.add('visible');
+          }, delay * 400);
+          haikuObserver.unobserve(line);
+        }
+      });
+    }, { threshold: 0.6 });
+
+    haikuLines.forEach(line => haikuObserver.observe(line));
+  }
+
+  // ==========================================
+  // ENSO — dibujo con scroll (rAF)
+  // ==========================================
+  const ensoCircle = document.getElementById('ensoPath');
+  const ensoContainer = document.querySelector('.enso-container');
+  let ensoRafId = null;
+
+  if (ensoCircle && ensoContainer && !prefersReducedMotion) {
+    let ensoProgress = 0;
+
+    function updateEnso() {
+      if (document.hidden) { ensoRafId = requestAnimationFrame(updateEnso); return; }
+
+      const rect = ensoContainer.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      const entry = viewH * 0.8;
+      const exit  = viewH * 0.15;
+      const raw = (entry - rect.top) / (entry - exit);
+      const target = Math.max(0, Math.min(1, raw));
+
+      ensoProgress += (target - ensoProgress) * 0.025;
+      ensoCircle.style.strokeDashoffset = 900 * (1 - ensoProgress);
+
+      ensoRafId = requestAnimationFrame(updateEnso);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && !ensoRafId) ensoRafId = requestAnimationFrame(updateEnso);
+    });
+
+    ensoRafId = requestAnimationFrame(updateEnso);
+  }
+
+  // ==========================================
+  // GOTAS DE AGUA — con limpieza de intervalo
+  // ==========================================
+  const sec2 = document.getElementById('sec2');
+  const waterDrops = document.getElementById('waterDrops');
+  let dropsIntervalId = null;
+  let dropsTriggered = false;
+
+  function triggerWaterDrops() {
+    if (!waterDrops) return;
+    const allDrops = waterDrops.querySelectorAll('.drop');
+
+    allDrops.forEach((drop, i) => {
+      setTimeout(() => {
+        drop.classList.add('fall');
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple';
+        ripple.style.left = drop.style.left;
+        ripple.style.top = drop.style.top;
+        ripple.classList.add('expand');
+        waterDrops.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 2000);
+      }, i * 200 + Math.random() * 600);
+    });
+  }
+
+  function startDropsInterval() {
+    if (dropsIntervalId || prefersReducedMotion) return;
+    triggerWaterDrops();
+    dropsIntervalId = setInterval(() => {
+      if (!waterDrops) return;
+      waterDrops.querySelectorAll('.drop').forEach((drop, i) => {
+        drop.classList.remove('fall');
+        void drop.offsetWidth;
+        setTimeout(() => {
+          drop.classList.add('fall');
+          const ripple = document.createElement('div');
+          ripple.className = 'ripple';
+          ripple.style.left = drop.style.left;
+          ripple.style.top = drop.style.top;
+          ripple.classList.add('expand');
+          waterDrops.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 2000);
+        }, i * 250);
+      });
+    }, 5000);
+  }
+
+  function stopDropsInterval() {
+    if (dropsIntervalId) {
+      clearInterval(dropsIntervalId);
+      dropsIntervalId = null;
+    }
+  }
+
+  if (sec2 && waterDrops && !prefersReducedMotion) {
+    for (let i = 0; i < 18; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'drop';
+      drop.style.left = (5 + Math.random() * 90) + '%';
+      drop.style.top = (10 + Math.random() * 70) + '%';
+      waterDrops.appendChild(drop);
+    }
+
+    const dropObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!dropsTriggered) { dropsTriggered = true; }
+          startDropsInterval();
+        } else {
+          stopDropsInterval();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    dropObserver.observe(sec2);
+  }
+
+  // ==========================================
+  // KINTSUGI — dibujar costuras al hacer scroll
+  // ==========================================
+  const sec3 = document.getElementById('sec3');
+  const kintsugiLines = document.querySelectorAll('.kintsugi-line');
+  const kintsugiGlow = document.getElementById('kintsugiGlow');
+  let kintsugiTriggered = false;
+
+  if (sec3 && kintsugiLines.length) {
+    const kintsugiObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !kintsugiTriggered) {
+          kintsugiTriggered = true;
+
+          kintsugiLines.forEach((line, i) => {
+            setTimeout(() => { line.classList.add('drawn'); }, i * 400);
+          });
+
+          setTimeout(() => {
+            if (kintsugiGlow) kintsugiGlow.classList.add('visible');
+          }, 1500);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    kintsugiObserver.observe(sec3);
+  }
+
+  // ==========================================
+  // PARTÍCULAS DORADAS en sec 3
+  // ==========================================
+  const goldParticles = document.getElementById('goldParticles');
+  if (goldParticles && !prefersReducedMotion) {
+    for (let i = 0; i < 25; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'gold-particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = (Math.random() * 8) + 's';
+      particle.style.animationDuration = (5 + Math.random() * 10) + 's';
+      particle.classList.add('float');
+      goldParticles.appendChild(particle);
+    }
+  }
+
+  // ==========================================
+  // CAMBIO DE FONDO SUAVE AL SCROLL (rAF)
+  // ==========================================
+  const sections = document.querySelectorAll('section');
+  const sectionColors = [
+    'oklch(0.42 0.02 95)',
+    'oklch(0.52 0.06 225)',
+    'oklch(0.48 0.05 70)',
+    'oklch(0.94 0.02 90)',
+  ];
+
+  let currentSection = 0;
+  let colorProgress = 1;
+  let bgUpdateRafId = null;
+  let bgApplyRafId = null;
+
+  function updateBackground() {
+    if (document.hidden) { bgUpdateRafId = requestAnimationFrame(updateBackground); return; }
+    const viewH = window.innerHeight;
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const rect = sections[i].getBoundingClientRect();
+      if (rect.top <= viewH * 0.5) {
+        currentSection = i;
+        colorProgress = Math.max(0, Math.min(1, (viewH * 0.5 - rect.top) / rect.height));
+        break;
+      }
+    }
+    bgUpdateRafId = requestAnimationFrame(updateBackground);
+  }
+
+  function applyBackground() {
+    if (document.hidden) { bgApplyRafId = requestAnimationFrame(applyBackground); return; }
+    const targetColor = sectionColors[currentSection];
+
+    if (currentSection < sectionColors.length - 1 && colorProgress > 0.7) {
+      const nextColor = sectionColors[currentSection + 1];
+      const t = (colorProgress - 0.7) / 0.3;
+      document.body.style.background = `color-mix(in oklch, ${targetColor} ${100 - t * 100}%, ${nextColor} ${t * 100}%)`;
+    } else {
+      document.body.style.background = targetColor;
+    }
+    bgApplyRafId = requestAnimationFrame(applyBackground);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      if (!bgUpdateRafId) bgUpdateRafId = requestAnimationFrame(updateBackground);
+      if (!bgApplyRafId) bgApplyRafId = requestAnimationFrame(applyBackground);
+    }
+  });
+
+  bgUpdateRafId = requestAnimationFrame(updateBackground);
+  bgApplyRafId = requestAnimationFrame(applyBackground);
+
+  console.log('✦ El Viaje de la Imperfección — Wabi-Sabi scroll experience');
+  console.log('  Optimizado: rAF con visibilitychange · Intervalos limpios · prefers-reduced-motion');
+</script>
+
+</body>
+</html>
