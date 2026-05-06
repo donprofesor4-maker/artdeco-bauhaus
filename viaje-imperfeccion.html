@@ -300,11 +300,46 @@
     80%      { opacity: 0.1; }
   }
 
+  /* ── RESPONSIVE ─────────────────────────── */
+
+  /* svh para móviles — evita que la barra del navegador recorte la pantalla */
+  @supports (min-height: 100svh) {
+    section { min-height: 100svh; }
+  }
+
+  /* ── TOUCH: sin hover, más espacio ──────── */
+  @media (pointer: coarse) {
+    .section-desc { line-height: 2.1; }
+  }
+
+  /* ── TABLETS ────────────────────────────── */
   @media (max-width: 768px) {
     section { padding: 4rem 1.5rem; }
-    .haiku-line { font-size: 1.1rem; }
+    .haiku-line { font-size: 1.2rem; }
+    .haiku-line.kanji { font-size: 1.5rem; }
+    .haiku-line.es { font-size: 1.05rem; }
+    .enso-svg { width: clamp(140px, 38vw, 220px); }
+    .bowl-svg { width: clamp(180px, 48vw, 260px); }
+    .kanji-big { font-size: clamp(4rem, 11vw, 8rem); }
+    .section-title { font-size: clamp(1.9rem, 5.5vw, 3rem); }
+    .section-content { max-width: 92vw; }
+  }
+
+  /* ── TELÉFONOS ──────────────────────────── */
+  @media (max-width: 480px) {
+    section { padding: 3rem 1.2rem; }
+    .section-title { font-size: clamp(1.8rem, 6vw, 2.4rem); margin-bottom: 0.7rem; }
+    .section-desc { font-size: 0.95rem; line-height: 1.85; }
+    .haiku-line { font-size: 1.15rem; }
     .haiku-line.kanji { font-size: 1.4rem; }
     .haiku-line.es { font-size: 1rem; }
+    .haiku-block { margin: 2rem 0; line-height: 2.4; }
+    .enso-svg { width: clamp(120px, 42vw, 180px); }
+    .enso-container { margin: 2rem 0; }
+    .bowl-svg { width: clamp(160px, 52vw, 220px); }
+    .bowl-container { margin: 2.5rem 0; }
+    .kanji-big { font-size: clamp(3.5rem, 14vw, 6rem); opacity: 0.05; }
+    .closing-quote { font-size: 1.05rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
