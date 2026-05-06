@@ -25,17 +25,17 @@
   @layer base {
     :root {
       /* Bauhaus primaries */
-      --rot:    oklch(0.58 0.23 30);
-      --blau:   oklch(0.48 0.18 260);
-      --gelb:   oklch(0.85 0.18 95);
+      --rot:    #D1342B;
+      --blau:   #3255A8;
+      --gelb:   #F5CF00;
       /* Art Decó metals */
-      --gold:   oklch(0.78 0.14 95);
-      --bronze: oklch(0.55 0.1 75);
-      --silver: oklch(0.82 0.01 260);
+      --gold:   #D4A020;
+      --bronze: #997745;
+      --silver: #C8C9CC;
       /* Surfaces */
-      --cream:  oklch(0.94 0.04 90);
-      --charcoal: oklch(0.15 0.03 260);
-      --dark:   oklch(0.08 0.04 265);
+      --cream:  #F5ECD8;
+      --charcoal: #272B33;
+      --dark:   #101522;
       /* Easing tokens — refinados, sutiles, académicos */
       --ease-spring:  cubic-bezier(0.25, 1.2, 0.5, 1);
       --ease-bounce:  cubic-bezier(0.34, 1.4, 0.64, 1);
@@ -44,11 +44,11 @@
       --ease-wabi:    cubic-bezier(0.45, 0.8, 0.5, 1);
       --ease-largo:   cubic-bezier(0.2, 0, 0, 1);
       /* Wabi-Sabi palette — apagado, terroso, contemplativo */
-      --washi:    oklch(0.94 0.02 85);
-      --sumi:     oklch(0.14 0.02 95);
-      --kuchiba:  oklch(0.52 0.08 50);
-      --aokezuri: oklch(0.38 0.04 240);
-      --kinsugi:  oklch(0.72 0.10 82);
+      --washi:    #F2EDE2;
+      --sumi:     #2B2A27;
+      --kuchiba:  #8B7353;
+      --aokezuri: #4B5E8A;
+      --kinsugi:  #BF9B50;
     }
 
     body {
@@ -67,7 +67,7 @@
     section { padding: 8rem 2rem; }
 
     ::selection {
-      background: oklch(0.78 0.14 95 / 0.35);
+      background: rgba(212,160,32,0.35);
       color: var(--charcoal);
     }
   }
@@ -124,8 +124,8 @@
     }
 
     @keyframes pulse-gold {
-      0%, 100% { box-shadow: 0 0 0 0 oklch(0.78 0.14 95 / 0.3); }
-      50%      { box-shadow: 0 0 0 12px oklch(0.78 0.14 95 / 0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212,160,32,0.30); }
+      50%      { box-shadow: 0 0 0 12px rgba(212,160,32,0); }
     }
 
     @keyframes spin-slow {
@@ -230,8 +230,8 @@
       width: 120vw; height: 120vw;
       background: radial-gradient(
         ellipse at center,
-        oklch(0.78 0.14 95 / 0.08) 0%,
-        oklch(0.78 0.14 95 / 0.03) 30%,
+        rgba(212,160,32,0.08) 0%,
+        rgba(212,160,32,0.03) 30%,
         transparent 60%
       );
       animation: float 8s var(--ease-smooth) infinite;
@@ -249,9 +249,9 @@
       /* Gradiente dorado Art Decó */
       background: linear-gradient(
         180deg,
-        oklch(0.92 0.12 90) 0%,
-        oklch(0.78 0.14 80) 40%,
-        oklch(0.55 0.1 65) 100%
+        #F0D550 0%,
+        #D49515 40%,
+        #8C6E30 100%
       );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -271,8 +271,8 @@
       box-shadow:
         120px 0 0 var(--gold),
         -120px 0 0 var(--gold),
-        240px 0 0 oklch(0.78 0.14 95 / 0.2),
-        -240px 0 0 oklch(0.78 0.14 95 / 0.2);
+        240px 0 0 rgba(212,160,32,0.20),
+        -240px 0 0 rgba(212,160,32,0.20);
     }
 
     .subtitle {
@@ -294,14 +294,14 @@
     .shape-circle {
       width: 120px; height: 120px;
       border-radius: 50%;
-      background: oklch(0.58 0.23 30 / 0.7);
+      background: rgba(209,52,43,0.70);
       top: 15%; left: 10%;
       animation: float 6s var(--ease-spring) infinite;
     }
 
     .shape-square {
       width: 100px; height: 100px;
-      background: oklch(0.48 0.18 260 / 0.7);
+      background: rgba(50,85,168,0.70);
       top: 60%; right: 8%;
       animation: float 8s var(--ease-bounce) infinite;
       animation-delay: -2s;
@@ -311,7 +311,7 @@
       width: 0; height: 0;
       border-left: 60px solid transparent;
       border-right: 60px solid transparent;
-      border-bottom: 110px solid oklch(0.85 0.18 95 / 0.7);
+      border-bottom: 110px solid rgba(245,207,0,0.70);
       top: 20%; right: 20%;
       animation: float 7s var(--ease-smooth) infinite;
       animation-delay: -4s;
@@ -320,14 +320,14 @@
     .shape-ring {
       width: 90px; height: 90px;
       border-radius: 50%;
-      border: 6px solid oklch(0.78 0.14 95 / 0.5);
+      border: 6px solid rgba(212,160,32,0.50);
       bottom: 20%; left: 15%;
       animation: spin-slow 20s linear infinite;
     }
 
     .shape-half-circle {
       width: 140px; height: 70px;
-      background: oklch(0.58 0.23 30 / 0.5);
+      background: rgba(209,52,43,0.50);
       border-radius: 0 0 140px 140px;
       bottom: 10%; right: 30%;
       animation: float 9s var(--ease-deco) infinite;
@@ -360,8 +360,8 @@
         90deg,
         transparent,
         transparent 40px,
-        oklch(0.78 0.14 95 / 0.08) 40px,
-        oklch(0.78 0.14 95 / 0.08) 41px
+        rgba(212,160,32,0.08) 40px,
+        rgba(212,160,32,0.08) 41px
       );
       pointer-events: none; z-index: 0;
     }
@@ -377,7 +377,7 @@
     .section-numeral {
       font-family: 'Playfair Display', serif;
       font-size: 6rem; font-weight: 900;
-      color: oklch(0.78 0.14 95 / 0.12);
+      color: rgba(212,160,32,0.12);
       line-height: 0.7;
       position: absolute;
       top: -2rem; left: -3rem;
@@ -404,7 +404,7 @@
     /* ── DECO CARD ───────────────────────── */
     .deco-card {
       background: white;
-      border: 1px solid oklch(0 0 0 / 0.08);
+      border: 1px solid rgba(0,0,0,0.08);
       padding: 3rem 2rem;
       position: relative;
       transition: transform 0.8s var(--ease-spring), box-shadow 0.8s var(--ease-smooth);
@@ -415,7 +415,7 @@
     .deco-card:hover,
     .deco-card.tapped {
       transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 12px 40px oklch(0 0 0 / 0.08);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
     }
 
     /* Esquina dorada */
@@ -506,14 +506,14 @@
       content: '';
       position: absolute; inset: 12px;
       border-radius: 50%;
-      border: 2px solid oklch(0.78 0.14 95 / 0.4);
+      border: 2px solid rgba(212,160,32,0.40);
       transition: all 1s var(--ease-smooth);
     }
     .shape-showcase:hover .shape-deco-rings,
     .shape-showcase.tapped .shape-deco-rings {
       transform: rotate(90deg) scale(1.08);
       border-color: var(--silver);
-      box-shadow: 0 0 40px oklch(0.78 0.14 95 / 0.3);
+      box-shadow: 0 0 40px rgba(212,160,32,0.30);
     }
 
     /* ── TIMELINE ART DECÓ ───────────────── */
@@ -572,7 +572,7 @@
     /* ── FORM SECTION ────────────────────── */
     .cta-section {
       text-align: center;
-      background: linear-gradient(180deg, var(--cream) 0%, oklch(0.9 0.05 85) 100%);
+      background: linear-gradient(180deg, var(--cream) 0%, #ECE1CC 100%);
     }
 
     .cta-button {
@@ -596,7 +596,7 @@
     .cta-button::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(120deg, transparent, oklch(0.78 0.14 95 / 0.2), transparent);
+      background: linear-gradient(120deg, transparent, rgba(212,160,32,0.20), transparent);
       transform: translateX(-100%);
       transition: transform 1s var(--ease-smooth);
     }
@@ -605,7 +605,7 @@
       background: transparent;
       color: var(--charcoal);
       transform: translateY(-4px);
-      box-shadow: 0 12px 30px oklch(0 0 0 / 0.15);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
     }
     .cta-button:hover::before { transform: translateX(100%); }
 
@@ -632,15 +632,15 @@
     /* Hero — círculo Bauhaus */
     .custom-cursor.bauhaus {
       width: 44px; height: 44px;
-      background: oklch(0.58 0.23 30 / 0.6);
+      background: rgba(209,52,43,0.60);
       border: 2px solid white;
     }
 
     /* Wabi-Sabi — forma orgánica */
     .custom-cursor.wabi {
       width: 38px; height: 38px;
-      background: oklch(0.52 0.08 50 / 0.5);
-      border: 1px solid oklch(0.72 0.10 82 / 0.6);
+      background: rgba(139,115,83,0.50);
+      border: 1px solid rgba(191,155,80,0.60);
       border-radius: 60% 40% 55% 45% / 40% 55% 45% 60%;
       animation: cursor-organic 4s var(--ease-smooth) infinite;
     }
@@ -655,7 +655,7 @@
     .custom-cursor.pointer {
       width: 28px; height: 28px;
       background: white;
-      border: 1px solid oklch(1 1 1 / 0.3);
+      border: 1px solid rgba(255,255,255,0.30);
       mix-blend-mode: normal;
     }
 
@@ -673,7 +673,7 @@
     }
 
     .colophon code {
-      background: oklch(1 1 0 / 0.06);
+      background: rgba(255,255,240,0.06);
       padding: 0.1rem 0.4rem;
       border-radius: 3px;
       font-size: 0.8em;
@@ -683,7 +683,7 @@
     .colophon .deco-rule {
       margin: 0 auto 2rem;
       width: 40px;
-      background: linear-gradient(90deg, var(--gold), oklch(0.78 0.14 95 / 0.2));
+      background: linear-gradient(90deg, var(--gold), rgba(212,160,32,0.20));
     }
 
     /* ── SOUND TOGGLE ────────────────────── */
@@ -691,8 +691,8 @@
       position: absolute;
       top: 2rem; right: 2rem;
       z-index: 10;
-      background: oklch(0.96 0.01 85 / 0.8);
-      border: 1px solid oklch(0 0 0 / 0.08);
+      background: rgba(248,243,237,0.80);
+      border: 1px solid rgba(0,0,0,0.08);
       border-radius: 50%;
       width: 40px; height: 40px;
       cursor: pointer;
@@ -713,7 +713,7 @@
     .sound-toggle.active {
       border-color: var(--kinsugi);
       color: var(--kinsugi);
-      box-shadow: 0 0 12px oklch(0.72 0.10 82 / 0.2);
+      box-shadow: 0 0 12px rgba(191,155,80,0.20);
     }
 
     @media (max-width: 768px) {
@@ -729,7 +729,7 @@
 
     .specimen-block {
       margin-bottom: 5rem;
-      border-bottom: 1px solid oklch(0 0 0 / 0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
       padding-bottom: 2rem;
     }
 
@@ -769,7 +769,7 @@
 
     .specimen-glyphs {
       font-size: 0.85rem;
-      color: oklch(0.3 0.04 260 / 0.4);
+      color: rgba(63,80,101,0.40);
       margin-top: 0.75rem;
       font-feature-settings: "ss01", "liga";
     }
@@ -882,16 +882,16 @@
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
       opacity: 0.5;
       background-image:
-        radial-gradient(circle at 15% 30%, oklch(0.52 0.08 50 / 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 75% 60%, oklch(0.38 0.04 240 / 0.05) 0%, transparent 35%),
-        radial-gradient(circle at 50% 80%, oklch(0 0 0 / 0.03) 0%, transparent 30%);
+        radial-gradient(circle at 15% 30%, rgba(139,115,83,0.06) 0%, transparent 40%),
+        radial-gradient(circle at 75% 60%, rgba(75,94,138,0.05) 0%, transparent 35%),
+        radial-gradient(circle at 50% 80%, rgba(0,0,0,0.03) 0%, transparent 30%);
     }
 
     .wabi-texture::after {
       content: '';
       position: absolute; inset: 0;
       background: repeating-linear-gradient(
-        0deg, transparent, transparent 2px, oklch(0 0 0 / 0.015) 2px, oklch(0 0 0 / 0.015) 3px
+        0deg, transparent, transparent 2px, rgba(0,0,0,0.015) 2px, rgba(0,0,0,0.015) 3px
       );
       mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
     }
@@ -932,8 +932,8 @@
 
     /* ── PRINCIPLE CARD ──────────────────── */
     .wabi-card {
-      background: oklch(0.96 0.01 85);
-      border: 1px solid oklch(0 0 0 / 0.06);
+      background: #F8F3ED;
+      border: 1px solid rgba(0,0,0,0.06);
       padding: 2.5rem 2rem;
       position: relative;
       transition: transform 1s var(--ease-wabi), box-shadow 1s var(--ease-smooth), border-color 0.8s;
@@ -950,8 +950,8 @@
     .wabi-card:hover,
     .wabi-card.tapped {
       transform: translateY(-6px);
-      box-shadow: 0 16px 40px oklch(0 0 0 / 0.08);
-      border-color: oklch(0.72 0.10 82 / 0.3);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      border-color: rgba(191,155,80,0.30);
     }
 
     /* Línea kintsugi dorada — aparece en hover */
@@ -962,11 +962,11 @@
       height: 1px;
       background: linear-gradient(90deg,
         transparent 10%,
-        oklch(0.72 0.10 82 / 0.6) 20%,
-        oklch(0.72 0.10 82 / 0) 40%,
-        oklch(0.72 0.10 82 / 0.4) 55%,
-        oklch(0.72 0.10 82 / 0) 70%,
-        oklch(0.72 0.10 82 / 0.6) 85%,
+        rgba(191,155,80,0.60) 20%,
+        rgba(191,155,80,0) 40%,
+        rgba(191,155,80,0.40) 55%,
+        rgba(191,155,80,0) 70%,
+        rgba(191,155,80,0.60) 85%,
         transparent 100%
       );
       opacity: 0;
@@ -1003,7 +1003,7 @@
     }
 
     .wabi-card p {
-      color: oklch(0.3 0.02 95);
+      color: #53504C;
       font-size: 0.95rem;
       line-height: 1.7;
     }
@@ -1021,7 +1021,7 @@
     }
 
     .wabi-stone .stone-body {
-      fill: oklch(0.38 0.04 240 / 0.15);
+      fill: rgba(75,94,138,0.15);
       stroke: var(--aokezuri);
       stroke-width: 1.5;
       transition: fill 1.2s var(--ease-wabi), stroke 1.2s var(--ease-wabi);
@@ -1029,7 +1029,7 @@
 
     .wabi-organic-container:hover .stone-body,
     .wabi-organic-container.tapped .stone-body {
-      fill: oklch(0.52 0.08 50 / 0.2);
+      fill: rgba(139,115,83,0.20);
       stroke: var(--kuchiba);
     }
 
@@ -1047,19 +1047,19 @@
     .wabi-ripple {
       position: absolute; width: 200px; height: 200px;
       border-radius: 50%;
-      border: 1px solid oklch(0.52 0.08 50 / 0.15);
+      border: 1px solid rgba(139,115,83,0.15);
       animation: wabi-breathe 12s var(--ease-wabi) infinite;
       pointer-events: none;
     }
     .wabi-ripple:nth-child(2) {
       width: 240px; height: 240px;
       animation-delay: -2s;
-      border-color: oklch(0.38 0.04 240 / 0.1);
+      border-color: rgba(75,94,138,0.10);
     }
     .wabi-ripple:nth-child(3) {
       width: 280px; height: 280px;
       animation-delay: -4s;
-      border-color: oklch(0.72 0.10 82 / 0.08);
+      border-color: rgba(191,155,80,0.08);
     }
 
     /* ── ENSO — círculo caligráfico ─────── */
@@ -1129,7 +1129,7 @@
     }
 
     .bowl-body {
-      fill: oklch(0.35 0.04 70);
+      fill: #655B46;
       stroke: var(--kuchiba);
       stroke-width: 1;
       transition: fill 1.8s var(--ease-wabi);
@@ -1137,7 +1137,7 @@
 
     .wabi-bowl-container:hover .bowl-body,
     .wabi-bowl-container.tapped .bowl-body {
-      fill: oklch(0.42 0.06 75);
+      fill: #78663E;
     }
 
     .kintsugi-seam {
@@ -1168,7 +1168,7 @@
     .petal {
       position: absolute;
       width: 9px; height: 13px;
-      background: oklch(0.72 0.10 82 / 0.3);
+      background: rgba(191,155,80,0.30);
       border-radius: 50% 0 50% 0;
       animation: petal-fall linear infinite;
     }
@@ -1228,6 +1228,26 @@
     transition: opacity 1.2s var(--ease-deco), transform 1.2s var(--ease-deco);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* OKLCH override — para navegadores modernos (Safari 15.4+, FF 113+, Chrome 111+) */
+  @supports (color: oklch(0 0 0)) {
+    :root {
+      --rot:      oklch(0.58 0.23 30);
+      --blau:     oklch(0.48 0.18 260);
+      --gelb:     oklch(0.85 0.18 95);
+      --gold:     oklch(0.78 0.14 95);
+      --bronze:   oklch(0.55 0.1 75);
+      --silver:   oklch(0.82 0.01 260);
+      --cream:    oklch(0.94 0.04 90);
+      --charcoal: oklch(0.15 0.03 260);
+      --dark:     oklch(0.08 0.04 265);
+      --washi:    oklch(0.94 0.02 85);
+      --sumi:     oklch(0.14 0.02 95);
+      --kuchiba:  oklch(0.52 0.08 50);
+      --aokezuri: oklch(0.38 0.04 240);
+      --kinsugi:  oklch(0.72 0.10 82);
+    }
+  }
 </style>
 </head>
 <body>
@@ -1273,7 +1293,7 @@
     <div class="deco-rule"></div>
     <div class="grid-2" style="margin-top:3rem;">
       <div class="reveal">
-        <p style="font-size:1.05rem; line-height:1.9; color:oklch(0.25 0.04 260);">
+        <p style="font-size:1.05rem; line-height:1.9; color:#2E3A52;">
           En 1919, Walter Gropius fundó la Staatliches Bauhaus en Weimar bajo un principio radical:
           la forma sigue a la función. Seis años después, la Exposition des Arts Décoratifs de París
           consagró el Art Decó: geometría fastuosa, metales nobles, ornamentación sin complejos.
@@ -1282,11 +1302,11 @@
         </p>
       </div>
       <div class="reveal" style="animation-delay:0.2s;">
-        <p style="font-size:1.05rem; line-height:1.9; color:oklch(0.25 0.04 260);">
+        <p style="font-size:1.05rem; line-height:1.9; color:#2E3A52;">
           Cada animación obedece a curvas de easing calibradas con precisión tipográfica:
-          <code style="background:oklch(0.78 0.14 95 / 0.15); padding:0.1rem 0.5rem; border-radius:4px;">cubic-bezier(0.25, 1.2, 0.5, 1)</code>
+          <code style="background:rgba(212,160,32,0.15); padding:0.1rem 0.5rem; border-radius:4px;">cubic-bezier(0.25, 1.2, 0.5, 1)</code>
           para una respuesta elástica de muelle amortiguado,
-          <code style="background:oklch(0.78 0.14 95 / 0.15); padding:0.1rem 0.5rem; border-radius:4px;">cubic-bezier(0.6, 0, 0.4, 1)</code>
+          <code style="background:rgba(212,160,32,0.15); padding:0.1rem 0.5rem; border-radius:4px;">cubic-bezier(0.6, 0, 0.4, 1)</code>
           para transiciones suaves tipo ease-out quint,
           y una curva wabi-sabi deliberadamente incompleta
           que nunca alcanza el 100% de velocidad.
@@ -1301,7 +1321,7 @@
      ═══════════════════════════════════════════ -->
 <section class="shapes-gallery">
   <div class="container" style="position:relative;">
-    <span class="section-numeral" style="color:oklch(1 1 0 / 0.06);">II</span>
+    <span class="section-numeral" style="color:rgba(255,255,240,0.06);">II</span>
     <p class="section-label" style="color:var(--silver);">· Interaktion ·</p>
     <h2 class="section-heading" style="color:var(--cream); margin-bottom:3rem;">
       Pasa el cursor<br>sobre las formas
@@ -1341,7 +1361,7 @@
   <div class="sumi-bleed"></div>
 
   <div class="container" style="position:relative;">
-    <span class="section-numeral" style="color:oklch(0.14 0.02 95 / 0.06);">III</span>
+    <span class="section-numeral" style="color:rgba(43,42,39,0.06);">III</span>
     <p class="section-label wabi-label reveal">· Wabi-Sabi ·</p>
 
     <div class="wabi-heading reveal">
@@ -1430,7 +1450,7 @@
         <path class="bowl-body"
           d="M205,60 C215,70 212,140 175,152 L112,152 L112,145 L172,145 C202,135 202,75 195,62 Z" />
         <!-- Base del cuenco -->
-        <ellipse cx="110" cy="64" rx="12" ry="7" fill="oklch(0.3 0.04 70)" stroke="var(--kuchiba)" stroke-width="0.5" opacity="0.6" />
+        <ellipse cx="110" cy="64" rx="12" ry="7" fill="#594F3E" stroke="var(--kuchiba)" stroke-width="0.5" opacity="0.6" />
         <!-- Costura kintsugi -->
         <path class="kintsugi-seam"
           d="M110,70 C112,90 108,120 110,145" />
@@ -1485,7 +1505,7 @@
      ═══════════════════════════════════════════ -->
 <section class="timeline">
   <div class="container" style="position:relative;">
-    <span class="section-numeral" style="color:oklch(1 1 0 / 0.06);">IV</span>
+    <span class="section-numeral" style="color:rgba(255,255,240,0.06);">IV</span>
     <p class="section-label" style="color:var(--silver);">· Cronología ·</p>
     <h2 class="section-heading" style="color:var(--cream); margin-bottom:4rem;">
       Tres miradas,<br>una belleza
@@ -1561,7 +1581,7 @@
     <h2 class="section-heading reveal" style="margin-top:1rem;">
       Form und Ornament
     </h2>
-    <p style="color:oklch(0.3 0.04 260); margin-bottom:2rem; font-size:1.1rem; max-width:550px; margin-left:auto; margin-right:auto;">
+    <p style="color:#3F5065; margin-bottom:2rem; font-size:1.1rem; max-width:550px; margin-left:auto; margin-right:auto;">
       Geometría que respira. Lujo que no grita. Imperfección que conmueve.<br>
       Tres miradas, una sola verdad estética.
     </p>
@@ -1645,12 +1665,12 @@
     <p style="font-size:0.75rem; color:var(--bronze); letter-spacing:0.2em; text-transform:uppercase;">
       Tipografía: Playfair Display, Inter, Cormorant Garamond, Noto Serif JP
     </p>
-    <p style="font-size:0.7rem; color:oklch(0.3 0.04 260 / 0.5); margin-top:1.5rem; max-width:500px; margin-left:auto; margin-right:auto;">
+    <p style="font-size:0.7rem; color:rgba(63,80,101,0.50); margin-top:1.5rem; max-width:500px; margin-left:auto; margin-right:auto;">
       Compuesto con CSS moderno: <code>@layer</code> para organización en cascada, <code>oklch()</code> para color perceptualmente uniforme,
       <code>cubic-bezier()</code> para curvas de animación, <code>view-timeline</code> para animaciones en scroll,
       <code>IntersectionObserver</code> para revelado progresivo. Sin frameworks, sin dependencias.
     </p>
-    <p style="font-size:0.65rem; color:oklch(0.3 0.04 260 / 0.3); margin-top:2rem;">
+    <p style="font-size:0.65rem; color:rgba(63,80,101,0.30); margin-top:2rem;">
       Haiku de Matsuo Bashō (1644–1694) · Enso según la escuela Rinzai · Kintsugi, tradición japonesa del siglo XV<br>
       Bauhaus, Weimar 1919–1933 · Exposition Internationale des Arts Décoratifs, París 1925
     </p>
