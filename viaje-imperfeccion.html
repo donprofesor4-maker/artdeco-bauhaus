@@ -10,20 +10,56 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --stone:   oklch(0.42 0.02 95);
-    --ceruleo: oklch(0.52 0.06 225);
-    --kintsugi: oklch(0.68 0.12 82);
-    --earth:   oklch(0.48 0.05 70);
-    --washi:   oklch(0.94 0.02 90);
-    --ease-wabi: cubic-bezier(0.45, 0.8, 0.5, 1);
-    --ease-largo: cubic-bezier(0.2, 0, 0, 1);
+    /* sRGB base — funciona en todos los navegadores */
+    --stone:     #615E58;
+    --ceruleo:   #528292;
+    --kintsugi:  #CF9A3B;
+    --earth:     #7E6D4E;
+    --washi:     #F2EDE5;
+    --text:      #EBE6DE;
+    --text-dim:  rgba(235,230,222,0.6);
+    --text-dark: #312F2B;
+    --text-dark-dim: rgba(49,47,43,0.7);
+    --enso-stroke:      rgba(235,230,222,0.25);
+    --enso-caption:     rgba(235,230,222,0.5);
+    --haiku-es:         rgba(235,230,222,0.6);
+    --drop-bg:          rgba(255,255,255,0.2);
+    --ripple-border:    rgba(255,255,255,0.15);
+    --bowl-fill:        rgba(158,140,115,0.6);
+    --bowl-stroke:      rgba(195,170,135,0.4);
+    --bowl-base:        rgba(130,110,85,0.4);
+    --ease-wabi:    cubic-bezier(0.45, 0.8, 0.5, 1);
+    --ease-largo:   cubic-bezier(0.2, 0, 0, 1);
     --ease-breathe: cubic-bezier(0.6, 0, 0.4, 1);
+  }
+
+  /* OKLCH override — navegadores modernos (Safari 15.4+, Firefox 113+, Chrome 111+) */
+  @supports (color: oklch(0 0 0)) {
+    :root {
+      --stone:     oklch(0.42 0.02 95);
+      --ceruleo:   oklch(0.52 0.06 225);
+      --kintsugi:  oklch(0.68 0.12 82);
+      --earth:     oklch(0.48 0.05 70);
+      --washi:     oklch(0.94 0.02 90);
+      --text:      oklch(0.92 0.02 90);
+      --text-dim:  oklch(0.92 0.02 90 / 0.6);
+      --text-dark: oklch(0.2 0.02 95);
+      --text-dark-dim: oklch(0.2 0.02 95 / 0.7);
+      --enso-stroke:    oklch(0.92 0.02 90 / 0.25);
+      --enso-caption:   oklch(0.92 0.02 90 / 0.5);
+      --haiku-es:       oklch(0.92 0.02 90 / 0.6);
+      --drop-bg:        oklch(1 1 1 / 0.2);
+      --ripple-border:  oklch(1 1 1 / 0.15);
+      --bowl-fill:      oklch(0.6 0.04 70 / 0.6);
+      --bowl-stroke:    oklch(0.7 0.06 75 / 0.4);
+      --bowl-base:      oklch(0.5 0.04 70 / 0.4);
+    }
   }
 
   body {
     font-family: 'Inter', sans-serif;
     background: var(--stone);
-    color: oklch(0.92 0.02 90);
+    color: var(--text);
     overflow-x: hidden;
     transition: background 1.2s var(--ease-breathe);
     font-weight: 300;
@@ -42,7 +78,7 @@
   .sec-1 { background: var(--stone); }
   .sec-2 { background: var(--ceruleo); }
   .sec-3 { background: var(--earth); }
-  .sec-4 { background: var(--washi); color: oklch(0.2 0.02 95); }
+  .sec-4 { background: var(--washi); color: var(--text-dark); }
 
   .section-content {
     max-width: 680px; text-align: center; position: relative; z-index: 2;
@@ -97,7 +133,7 @@
 
   .enso-circle {
     fill: none;
-    stroke: oklch(0.92 0.02 90 / 0.25);
+    stroke: var(--enso-stroke);
     stroke-width: 1;
     stroke-linecap: round;
     stroke-dasharray: 900;
@@ -112,7 +148,7 @@
     font-size: 0.85rem;
     opacity: 0;
     transition: opacity 1.6s var(--ease-wabi) 0.6s;
-    color: oklch(0.92 0.02 90 / 0.5);
+    color: var(--enso-caption);
   }
 
   .enso-caption.visible { opacity: 0.5; }
@@ -142,7 +178,7 @@
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 1.2rem;
-    color: oklch(0.92 0.02 90 / 0.6);
+    color: var(--haiku-es);
   }
 
   /* ── GOTAS DE AGUA ────────────────────── */
@@ -154,7 +190,7 @@
   .drop {
     position: absolute;
     width: 3px; height: 12px;
-    background: oklch(1 1 1 / 0.2);
+    background: var(--drop-bg);
     border-radius: 50%;
     opacity: 0;
   }
@@ -172,7 +208,7 @@
   .ripple {
     position: absolute;
     width: 4px; height: 4px;
-    border: 1px solid oklch(1 1 1 / 0.15);
+    border: 1px solid var(--ripple-border);
     border-radius: 50%;
     opacity: 0;
   }
@@ -197,8 +233,8 @@
   }
 
   .bowl-half {
-    fill: oklch(0.6 0.04 70 / 0.6);
-    stroke: oklch(0.7 0.06 75 / 0.4);
+    fill: var(--bowl-fill);
+    stroke: var(--bowl-stroke);
     stroke-width: 0.8;
   }
 
@@ -350,7 +386,7 @@
         <path class="bowl-half"
           d="M270,75 C280,88 275,165 240,175 L152,175 L152,165 L242,165 C265,155 265,90 260,78 Z" />
         <!-- Base -->
-        <ellipse cx="150" cy="80" rx="14" ry="8" fill="oklch(0.5 0.04 70 / 0.4)" />
+        <ellipse cx="150" cy="80" rx="14" ry="8" fill="rgba(130,110,85,0.4)" style="fill: var(--bowl-base)" />
         <!-- Costura kintsugi principal -->
         <path class="kintsugi-line" id="kintsugiMain"
           d="M150,85 C152,108 148,138 150,168" />
@@ -373,7 +409,7 @@
   <div class="kanji-big" style="opacity:0.04">空</div>
   <div class="section-content">
     <h2 class="section-title">Blanco roto</h2>
-    <p class="section-desc" style="color:oklch(0.2 0.02 95 / 0.7);">
+    <p class="section-desc" style="color: var(--text-dark-dim);">
       Vuelta al vacío — pero con huellas. Como el papel que retuvo la tinta
       después de que el poema fue escrito.
     </p>
@@ -594,17 +630,59 @@
   // CAMBIO DE FONDO SUAVE AL SCROLL (rAF)
   // ==========================================
   const sections = document.querySelectorAll('section');
-  const sectionColors = [
+  const supportsColorMix = CSS.supports('color', 'color-mix(in oklch, black, white)');
+
+  // OKLCH strings para navegadores con color-mix nativo
+  const sectionColorsOklch = [
     'oklch(0.42 0.02 95)',
     'oklch(0.52 0.06 225)',
     'oklch(0.48 0.05 70)',
     'oklch(0.94 0.02 90)',
   ];
 
+  // sRGB arrays como fallback
+  const sectionColorsRgb = [
+    [97, 94, 88],    // stone:   #615E58
+    [82, 130, 146],  // ceruleo: #528292
+    [126, 109, 78],  // earth:   #7E6D4E
+    [242, 237, 229], // washi:   #F2EDE5
+  ];
+
   let currentSection = 0;
   let colorProgress = 1;
   let bgUpdateRafId = null;
   let bgApplyRafId = null;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function applyBackground() {
+    if (document.hidden) { bgApplyRafId = requestAnimationFrame(applyBackground); return; }
+
+    if (currentSection < sectionColorsRgb.length - 1 && colorProgress > 0.7) {
+      const t = (colorProgress - 0.7) / 0.3;
+
+      if (supportsColorMix) {
+        const from = sectionColorsOklch[currentSection];
+        const to = sectionColorsOklch[currentSection + 1];
+        document.body.style.background = `color-mix(in oklch, ${from} ${100 - t * 100}%, ${to} ${t * 100}%)`;
+      } else {
+        const c = sectionColorsRgb[currentSection];
+        const n = sectionColorsRgb[currentSection + 1];
+        const r = Math.round(lerp(c[0], n[0], t));
+        const g = Math.round(lerp(c[1], n[1], t));
+        const b = Math.round(lerp(c[2], n[2], t));
+        document.body.style.background = `rgb(${r},${g},${b})`;
+      }
+    } else {
+      if (supportsColorMix) {
+        document.body.style.background = sectionColorsOklch[currentSection];
+      } else {
+        const c = sectionColorsRgb[currentSection];
+        document.body.style.background = `rgb(${c[0]},${c[1]},${c[2]})`;
+      }
+    }
+    bgApplyRafId = requestAnimationFrame(applyBackground);
+  }
 
   function updateBackground() {
     if (document.hidden) { bgUpdateRafId = requestAnimationFrame(updateBackground); return; }
@@ -619,20 +697,6 @@
       }
     }
     bgUpdateRafId = requestAnimationFrame(updateBackground);
-  }
-
-  function applyBackground() {
-    if (document.hidden) { bgApplyRafId = requestAnimationFrame(applyBackground); return; }
-    const targetColor = sectionColors[currentSection];
-
-    if (currentSection < sectionColors.length - 1 && colorProgress > 0.7) {
-      const nextColor = sectionColors[currentSection + 1];
-      const t = (colorProgress - 0.7) / 0.3;
-      document.body.style.background = `color-mix(in oklch, ${targetColor} ${100 - t * 100}%, ${nextColor} ${t * 100}%)`;
-    } else {
-      document.body.style.background = targetColor;
-    }
-    bgApplyRafId = requestAnimationFrame(applyBackground);
   }
 
   document.addEventListener('visibilitychange', () => {
